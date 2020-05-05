@@ -1,0 +1,28 @@
+.TestList{
+  margin: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,  minmax(250px, 1fr));
+  grid-gap: 2em;
+}
+
+.TestItem{
+  padding: 5px;
+  grid-gap: 1em;
+  justify-items:center;
+  border: 1pt solid gray;
+  width: 100%;
+  height:  minmax(250px, 1fr);
+}
+
+.TestItem:hover{
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+
+.TestItem img{
+  width: 100%;
+  height: 100%;
+  justify-items:center;
+
+
+}

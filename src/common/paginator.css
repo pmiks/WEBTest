@@ -1,0 +1,54 @@
+.pagenator{
+    overflow: hidden;
+    padding: 2px
+}
+
+.pagenator > span{
+    font-size: 12px;
+    font-weight: bold;
+    border-color:#ffffff;
+    color: #000000;
+    background-color: #ffffff;
+    border-width:1px;
+    margin-right: 2px;
+    border-style:solid;
+    cursor:pointer;
+/*    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    background-color: rgba(255,255,255,0);*/
+    padding: 3px;
+    min-width: 24px;
+  }
+
+  .pagenator > span:hover{
+      font-size: 12px;
+      font-weight: bold;
+      color: #ffffff;
+      border-color:#ffffff;
+      background-color: grey;
+      border-width:1px;
+      margin-right: 2px;
+      border-style:solid;
+      cursor:pointer;
+      border-radius: 3px;
+  /*    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+      background-color: rgba(255,255,255,0);*/
+      padding: 3px;
+      min-width: 24px;
+    }
+
+    .pagenator > .selectedPageNumber{
+        font-size: 12px;
+        font-weight: bold;
+        color: #ffffff;
+        border-color:#ffffff;
+        background-color: grey;
+        border-width:1px;
+        margin-right: 2px;
+        border-style:solid;
+        cursor:pointer;
+        border-radius: 3px;
+    /*    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        background-color: rgba(255,255,255,0);*/
+        padding: 3px;
+        min-width: 24px;
+      }

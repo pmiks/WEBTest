@@ -1,0 +1,27 @@
+.channellist{
+  align-items: center;
+  display: block;
+  width: 80%;
+  display: inline-block;
+}
+
+.channellist>div{
+  font-size: 20pt;
+  font-weight: bold;
+  display:inline-block;
+}
+
+.preset{
+  width: 10%;
+  background-color: green;
+}
+
+.name{
+  width: 90%;
+  background-color: gray;
+}
+
+.name:hover{
+  width: 90%;
+  background-color: red;
+}

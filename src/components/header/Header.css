@@ -1,0 +1,53 @@
+.line{
+  display: grid;
+  grid-template-columns: 3fr 9fr 3fr 1fr;
+  align-items: center;
+  justify-items:left;
+}
+
+
+.line input{
+  border-radius: 15px;
+  padding: 3px 10px ;
+  border: 0;
+  background-color: #b05d1e;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #eb8334;
+}
+
+.line input:focus{
+  border-width: 0;
+  background-color: white;
+  color: black;
+}
+
+
+div.NAME{
+  border-radius: 15px;
+  padding: 7px 10px ;
+  border: 0;
+  background-color: inherit;
+  font-size: 12pt;
+  font-weight: bold;
+  color: white;
+}
+
+
+.line input::placeholder{
+  color: #eb8334;
+}
+
+.line button{
+  border-radius: 3px;
+  padding: 3px 10px ;
+  margin-right: 20px;
+  border: 0;
+  background-color: #eb8334;
+  font-size: 12pt;
+  color: white;
+
+}
+.line button:hover{
+  background-color: #b05d1e
+}
