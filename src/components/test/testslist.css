@@ -1,68 +1,70 @@
-/*Общие стили---------------------------------------------------*/
-
-button{
-  font-size: 8pt;
-  font-weight: 700;
-  color: white;
-  background-color: black;
-  border: 1px solid white;
-  border-radius: 3px;
-  padding: 5px 3px;
-  margin: 5px 5px;
+/* Заголовок теста--------------------------------------*/
+.testname{  display: grid; grid-template-columns:  1fr auto; margin-top: 20px;
+  margin-bottom: 50px; margin-left: 0; margin-right: 0; background: gray;
+  padding: 2px 50px; color: white; opacity: 0.5; align-items: center;grid-gap: 50px
 }
 
-button:hover:not([disabled]){ background-color: grey;}
+.testname>.name{ font-size: 30px; font-weight: bold; text-align: left; }
 
-button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
+.testname>.time{ font-size: 20px; font-weight: bold; text-align: right;}
 
+/* Блок вопроса--------------------------------------*/
 .question{
     padding: 2%;
-/*    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 1%;
-    margin-bottom: 1%;*/
-    margin-top: 1%;
+    margin-top: 10pt;
     color:black;
-    opacity: 1;
     background-color: white;
     border: 1px dotted grey;
-    border-radius: 5px;
+    border-radius: 1px;
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    bottom:  10%;
 }
+/* Поле вопроса--------------------------------------*/
+.questionitem{height: 100%;align-items: center; display: block;align-self: flex-end;}
+.questionitempic{align-items: center; display: block;}
+.questionitempic>img{ height: 200px; border: 1px solid grey;}
+.questionitem>div{margin:20px; font-size: 20pt; font-weight: bold; display: inline-block;}
+
+/* Поле ответа--------------------------------------*/
+
+.answerlist{ display: grid; grid-template-columns: 1fr; grid-gap: 4px; background-color: inherit;;}
+
+.answerlist >.answeritem{
+  text-align: left;
+  padding: 4px 40px;
+  border: 1px solid red;
+  color:#ffffff;
+  border-radius: 1px;
+  background-color: #211f1f;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(3,minmax(min-content,max-content));
+  grid-auto-rows: minmax(min-content,max-content);
+  font-size: 16pt; font-weight: normal;
+}
+.answerlist >.answeritem>.pic{ width:100%}
+.answerlist >.answeritem>.pic img{height: 50px}
+.answerlist >.answeritem>.nn{}
+.answerlist >.ansselector{}
+.answerlist >.item{}
+.answerlist >.item:hover{ color:black; background-color: #858181; box-shadow:  0 0 25px rgba(0,130,255,1);}
+.answerlist >.itemselected{ color:#ffffff;  background-color: blue;  box-shadow: 0 0 25px rgba(255,0,0,1);}
+.answerlist >.itemselected:hover{ color:#000000; background-color: #858181; box-shadow: 0 0 25px rgba(255,0,0,1);}
+.answerlist >.wrongitem{ background-color: red; box-shadow: 0 0 25px rgba(255,0,0,1);}
+.answerlist >.rightitem{ background-color: green; box-shadow: 0 0 25px rgba(0,255,0,1); }
 
 
-.questionitem{
-  position:relative;
-  align-items: center;
-  display: block;
-}
+/* Поле ввода ответа-------------------------------------*/
+.answerinputitem{ font-family: "Arial"; background-color: #211f1f;  color:#ffffff;  padding: 20px;}
 
-.questionitempic{
-  align-items: center;
-  display: block;
-}
+.answerinputitem input{ height: 1em; font-size: 16pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit;text-align: center; margin-bottom: 15px}
 
-.questionitempic>img{
-  width: 70%;
-  border: 1px solid grey;
-}
-
-.questionitem>div{
-  margin:20px;
-  font-size: 20pt;
-  font-weight: bold;
-  display: inline-block;
-}
+/* -------------------------------------------------------*/
 
 /* Блокирующий экран--------------------------------------*/
-.BlockLayer{
-  right: 0;
-  left:0;
-  top:0;
-  bottom:0;
+.BlockLayer{ right: 0; left:0; top:0; bottom:0;
   display: block;
   position:fixed;
-  padding: 1%;
   background-color: white;
   z-index: 1;
   opacity: 0.2;
@@ -71,16 +73,12 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
   align-self: center;
 }
 
-
 /* Результат вопроса--------------------------------------*/
 .QuestionResult{
-  border: 3px dotted white;
   background-color: green;
   padding: 1%;
-  opacity: 1;
-  z-index: 11;
+  z-index: 2;
   display: block;
-  position: fixed;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -92,7 +90,6 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
   font-size: 20pt;
   font-weight: bold;
 }
-
 .wrong{  background-color: red;}
 
 .QuestionResultInner button{
@@ -108,44 +105,33 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
 .AlertWindow{
   border: 3px dotted white;
   background-color: green;
-  padding: 1%;
   opacity: 1;
-  z-index: 11;
+  z-index: 2;
   display: block;
   position: fixed;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px dotted grey;
   border-radius: 5px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   color:white;
   font-size: 20pt;
   font-weight: bold;
 }
-
 .error{  background-color: red;}
-
-
-
-
 .clousebutton{}
+
 
 /* Панель инструментов--------------------------------------*/
 .edittools{
-/*  position:fixed;
-  top: 50%;
-  left: 10%;*/
   align-self:top;
   border: 1px dotted grey;
-  padding: 5px;
+  padding: 0;
   display: grid;
   grid-template-columns:  1fr;
-  background-color: orange;
-  border-radius: 0px;
+  background-color: #fcb944;
   margin-bottom: 10 px;
-
 }
 
 .edittools button{
@@ -153,21 +139,16 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
 }
 
 .edittools>.header{
-  font-size: 14;
+  font-size: 16pt;
   font-weight: bold;
   margin-top: 3px;
   margin-bottom: 2px;
-  padding: 5px;
 }
-
 .edittools>.delimiter{
-  height: 1px;
-  border: 1px solid grey;
-  margin-top: 3px;
-  margin-bottom: 3px;
+  height: 0px;
+  border: 1px dotted grey;
+  margin: 3px 0;
 }
-
-
 
 /* Список тестов--------------------------------------*/
 
@@ -205,97 +186,40 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
 .questionedit{
   width: 100%;
   display: grid;
-  grid-template-columns: 100px 20fr 1fr;
+  grid-template-columns: minmax(min-content,max-content) 20fr 180px;
   grid-column-gap:10px;
   align-items: center;
   font-size: 8pt;
   }
 
-  .questionedit>.option{width:200px;}
-
-
-.questionedit>.pic{ background-color: black;}
-
+.questionedit>.option{text-align: right;}
+.questionedit>.pic{}
 .questionedit img{ width: 100%; border: 1px solid grey;}
-
 .questionedit>.questiontext {}
-
-.questionedit button{}
+.questionedit button {margin: 0}
 .questionedit button:hover{}
-
-.questionedit textarea {height: 4em; font-size: 10pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit; font-family: "Arial";}
+.questionedit textarea {height: 3em; font-size: 12pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit; font-family: inherit;}
 .questionedit .inputfile { width: 0.1px;	height: 0.1px;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;}
 .questionedit .inputfile + label {font-weight: 700; color: white; background-color: black; display: inline-block; border: 1px solid white; border-radius: 3px; padding: 3px;}
 .questionedit .inputfile:focus + label,
 .questionedit .inputfile + label:hover { background-color: grey; cursor: pointer; /* "hand" cursor */}
-
-.questioncomment {
-  margin: 20px 0;
-  display: grid;
-  grid-template-columns: minmax(min-content,max-content) 1fr;
-  grid-gap: 15px;
-  width: 100%}
+.questioncomment { margin: 10px 0;  display: grid;  grid-template-columns: minmax(min-content,max-content) 1fr;  grid-gap: 15px;  width: 100%}
 .questioncomment label {width: 100%;font-weight: bolder;}
-.questioncomment textarea  {height: 4em; font-size: 10pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit; font-family: "Arial";}
-
-/* Поле ответа--------------------------------------*/
-
-.answerlist{
-    font-family: "Arial";
-		text-align: left;
-    margin: 10px;
-    background-color: white;
-}
-
-.answerlist >.answeritem{
-  padding: 10px;
-  border-width: 1px;
-  border-style:solid;
-  border-color: red;
-  color:#ffffff;
-  border-radius: 1px;
-  background-color: #211f1f;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: minmax(min-content,max-content) minmax(min-content,max-content) 1fr;
-  grid-auto-rows: minmax(min-content,max-content);
-  font-size: 20px; font-weight: bold;
-}
-
-.answerlist >.answeritem>.pic{ width:100%}
-.answerlist >.answeritem>.pic img{height: 50px}
-.answerlist >.answeritem>.nn{}
-.answerlist >.ansselector{}
-.answerlist >.answeritemtext{ background-color: inherit; width: 5%; font-size: 20pt; font-weight: bold;}
-
-.answerlist >.item{}
-
-.answerlist >.item:hover{ color:black; background-color: #858181; box-shadow:  0 0 25px rgba(0,130,255,1);}
-
-.answerlist >.itemselected{ color:#ffffff;  background-color: blue;  box-shadow: 0 0 25px rgba(255,0,0,1);}
-
-.answerlist >.itemselected:hover{ color:#000000; background-color: #858181; box-shadow: 0 0 25px rgba(255,0,0,1);}
-
-.answerlist >.wrongitem{ background-color: red; box-shadow: 0 0 25px rgba(255,0,0,1);}
-
-.answerlist >.rightitem{ background-color: green; box-shadow: 0 0 25px rgba(0,255,0,1); }
-
-
-
+.questioncomment textarea  {height: 3em; font-size: 12pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit; font-family:inherit;;}
 
 /*Редактируемое поле ответа*/
-
 .answerlistedit{
-    font-family: "Arial";
-    margin: 2px;
+    font-family: inherit;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 0px;
     background-color: white;
 }
-
 .answerlistedit>.answeredit{
-    font-family: "Arial";
-		background-color: #211f1f;
-    color:#ffffff;
-    border-radius: 1px; border: 1px solid red;
+    font-family: inherit;
+		background-color: white;
+    color:black;
+    border-radius: 1px; border: 1px solid grey;
     width: 100%;
     display: grid;
     grid-template-columns: 100px 3fr 1fr;
@@ -303,18 +227,13 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
     align-items: center;
     font-size: 8pt;
 }
-
-
 .answerlistedit>.answeredit input{ font-size: inherit; background-color: inherit;color: inherit;font-weight: bold;}
-.answerlistedit>.answeredit> .pic {width:100px;  text-align: center; margin: 5px;}
+.answerlistedit>.answeredit> .pic {width:100px; text-align: center; margin: 0px;}
 .answerlistedit>.answeredit> .pic img {width:100%; }
 .answerlistedit>.answeredit> .answer {}
 .answerlistedit>.answeredit> .options {padding: 5px}
-
-.answerlistedit>.answeredit textarea { height: 4em; font-size: 10pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit;}
-
+.answerlistedit>.answeredit textarea { height: 3em; font-size: 12pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit;}
 .answerlistedit>.rightitem{ background-color: green; box-shadow: 0 0 20px rgba(0,255,0,1);}
-
 .answerlistedit>.answeredit button{}
 .answerlistedit>.answeredit button:hover{ background-color: grey;}
 .answerlistedit>.answeredit .inputfile { width: 0.1px;	height: 0.1px;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;}
@@ -322,144 +241,93 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
 .answerlistedit>.answeredit .inputfile:focus + label,
 .answerlistedit>.answeredit .inputfile + label:hover {  background-color: grey; cursor: pointer; /* "hand" cursor */}
 
-.answerinputitem{
-    font-family: "Arial";
-		background-color: #211f1f;
-    color:#ffffff;
-    padding: 20px;
-/*    border-radius: 1px; border: 1px solid red;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 100px 3fr 1fr;
-    grid-column-gap:10px;
-    align-items: center;
-    font-size: 8pt;*/
-}
-
-
-.answerinputitem input{ height: 1em; font-size: 16pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit;text-align: center; margin-bottom: 15px}
 
 /*Форма редактирования теста*/
-.testedit{
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 5px;
-  font-size: 12pt;
-  margin: 3% 3%;
-}
-
+.testedit{margin-top: 10px; display: grid; grid-template-columns: 1fr;  grid-gap: 1px;  font-size: 12pt;}
 .testedit div{
+     display: inline;
+     width: 100%;
      background-color: #d6bb81;
      border-radius: 1pt;
      display: grid;
      grid-template-columns: minmax(min-content,max-content) 1fr minmax(min-content,max-content);
      justify-items:start;
      align-items:center;
-
-
+     width: 100%
 }
-
-.testedit label{
-     align-self: center;
-     margin: 0 10px;
-     font-weight: bold;
-}
-
-.testedit input{
-  justify-self: stretch;
-  align-self: center;
-  font-size: 12pt;
-  padding: 1px;
-  margin: 5px;
-}
-
-.checktype{
-  justify-content:flex-start;
-  grid-column: 1/3;
-}
+.testedit label{ align-self: center; margin: 0 10px; font-weight: bold;white-space: nowrap;}
+.testedit input{ justify-self: stretch;  align-self: center; font-size: 12pt; padding: 1px;  margin: 5px;}
+.testedit>.checktype{ justify-content:flex-start; grid-column: 1/3;}
 
 /*Форма результата теста*/
 .testres{
   display: grid;
   grid-auto-columns: minmax(min-content,max-content);
-  grid-row-gap: 10px;
-  margin: 5%;
-  color: white;
-  background-color: purple;
-  padding: 10px;
-  border-radius: 5px;
+  grid-row-gap: 5px;
+  color: black;
+/*  background-color: purple;*/
+  padding: 5px;
   box-shadow: 0 0 50px rgba(55,55,55,1);
   justify-items:stretch;
+
 }
 
-.testres>div{
+.num{ grid-area: n;  width: 30px;}
+.qimg{  grid-area: qi;  width: 100px;  justify-self: left;  align-self:  center;}
+.questtext{  background-color: white;  grid-area: q;}
+.testres>div.item{
+  grid-template-areas:
+    "n qi q  q"
+    "n qi ra wa"
+     ;
+  grid-template-columns: 30px 150px 1fr 1fr;
   background-color: orange;
   padding: 5px;
-  border-radius: 5px;
   border: 1px solid black;
   display: grid;
-  grid-template-columns: repeat(4,minmax(min-content,max-content)) 1fr;
   grid-gap: 5px;
   justify-self:stretch;
 }
+.testres img{  height: 50px;}
+.finalresult{  font-size: 20pt; font-weight: 700;}
 
-.testres img{
-  height: 50px;
-}
-
-.finalresult{
-  font-size: 20pt;
-  font-weight: 700;
-}
-
-.res{
-  align-self: stretch;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 5px;
-}
-
-
-.res>.wrightresult{
+.wrightresult{
+  grid-area: ra;
   padding: 5px;
   text-align: left;
   background-color: red;
+  color: white;
 }
-
-.res>.wrongresult{
+.wrongresult{
+  grid-area: wa;
   padding: 5px;
   text-align: left;
   background-color: green;
+  color: white;
 }
 
 /*Cписок билетов еdit*/
-.TicketsEdit{
+.TicketsEdit{ display: grid;  grid-gap: 5px;  grid-template-columns:  1fr;  margin: 5px;  position:relative;
+  justify-items: stretch;  align-items: center;}
+
+.TicketItem{
   display: grid;
-  grid-gap: 5px;
-  grid-template-columns:  1fr;
-
+  position:relative;
+  grid-template-columns: 20% 65% 15%;
+  border: 1px solid grey;
+  align-items: center;
 }
-
-.TicketsEdit div{
-  background-color: yellow;
-  justify-items:left;
-  text-align: center;
-  border: 1px solid orange;
-  border-radius: 3px;
-  width: 100%;
-}
-
-.TicketsEdit input{
-
-}
+.TicketItem div{ text-align: left;overflow-x: hidden;}
+.TicketItem input{width: 100%; overflow-x: hidden;}
+.TicketItem button{}
 /*Cписок билетов*/
+
 .TicketsList{
   display: grid;
   grid-gap: 5px;
   grid-template-columns:  repeat(1, minmax(150px, 1fr));
   margin: 10%;
 }
-
 .TicketsList div{
   background-color: yellow;
   justify-items:left;
@@ -468,7 +336,6 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
   border-radius: 3px;
   width: 100%;
 }
-
 .TicketsList div:hover{
   background-color: orange;
   justify-items:left;
@@ -478,44 +345,13 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
   width: 100%;
 }
 
+.edittestpage{ display: grid;  grid-template-columns: 2fr 6fr;  grid-gap: 10px}
 
-.edittestpage{
-  display: grid;
-  grid-template-columns: 2fr 4fr;
-  grid-gap: 10px
-}
+.edittestpage>.menu {  align-self:flex-start;  display: grid;  grid-template-columns: 1fr;  grid-gap: 7px;}
 
-.edittestpage>.menu {
-  top: 0px;
-  bottom: 0px;
-  align-self:baseline;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 7px;
-  padding: 10px;
-}
+.testpage{  padding-top: 1%;  padding-left: 10%;  padding-right:10%;}
 
-.testpage{
-  padding-top: 1%;
-  padding-left: 10%;
-  padding-right:10%;
-
-}
-
-.TestCheckRed {
-  background-color: red;
-  font-size: 8pt;
-  font-weight: bold;
-  overflow-y: scroll;
-  height:  100pt;
-  padding: 5px;
-  box-shadow: 0 0 50px rgba(0,0,0,0.5);
-  text-align:left;
-
-}
-
-.TestCheckGreen {
-  background-color: green;
+.TestCheck{
   font-size: 8pt;
   font-weight: bold;
   overflow-y: scroll;
@@ -524,13 +360,11 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
   text-align:left;
 }
+.red { background-color: red;}
+.green { background-color: green;}
+.TestCheck button{ font-size: 7pt; padding: 1px}
 
-.TestCheckRed button{ font-size: 7pt; padding: 1px}
-.TestCheckGreen button{  font-size: 7pt;padding: 1px}
-
-
-
-
+ /*Общие стили---------------------------------------------------*/
 
  .pic {width:100px;  text-align: center; margin: 5px; font-size: 8pt}
  .inputfile { width: 0.1px;	height: 0.1px;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;}
@@ -538,18 +372,49 @@ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
  .inputfile:focus + label,
  .inputfile + label:hover {  background-color: grey; cursor: pointer; /* "hand" cursor */}
 
+.ShowBigImageBox{  width: 70%;  display: inline-block;}
+.ShowBigImage img{ position:fixed ;top:50%;left:50%;transform: translate(-50%, -50%);max-height: 90%;max-width: 90%;z-index: 2}
 
-.ShowBigImageBox{
-  width: 70%;
-  display: inline-block;
+ /*Общие стили---------------------------------------------------*/
+ button{
+   font-size: 8pt;
+   font-weight: 700;
+   color: white;
+   background-color: black;
+   border: 1px solid white;
+   border-radius: 3px;
+   padding: 5px 3px;
+   margin: 5px 5px;
+ }
+ button:hover:not([disabled]){ background-color: grey;}
+
+ button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
+
+
+div.endtest{
+  font-size: 12pt;
+  font-weight: 700;
+  color: red;
+  background-color: orange;
+  border: 1px solid red;
+  border-radius: 3px;
+  padding: 5px 3px;
+  margin: 5px 5px;
+  position: fixed;
+  bottom: 2px;
+  left: 10px;
+  right: 10px;
 }
 
- .ShowBigImage img{
-   position:fixed ;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   max-height: 90%;
-   max-width: 90%;
-   z-index: 2
- }
+div.endtest:hover:not([disabled]){ background-color: red;color:white}
+
+.BackLayer{ right: 0; left:0; top:0; bottom:0;
+  display: block;
+  position:fixed;
+  background-color: white;
+  z-index: -1;
+  opacity: 0.2;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+}

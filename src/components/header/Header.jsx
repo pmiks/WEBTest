@@ -8,7 +8,8 @@ import LoginScr from '../test/LoginScr';
 const Header = (props) =>{
   return <div className="Header line">
    <div className="NAME">#лучшедома</div>
-   <div><input type="text" placeholder="&#128269; Поиск"/></div>
+   <div><input style={{"width":"10em"}} type="text" placeholder="&#128269; Поиск"/></div>
+   <div></div>
    <LoginScr/>
    </div>
 }

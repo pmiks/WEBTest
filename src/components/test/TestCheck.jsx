@@ -11,7 +11,7 @@ import './testslist.css';
 const TestCheck=({check,goToQuest})=>{
   debugger;
 
-if (check) {  return <div className={check.errors==0?"TestCheckGreen":"TestCheckRed"}>
+if (check) {  return <div className={check.errors==0?"TestCheck green":"TestCheck red"}>
     <div>Ошибок:{check.errors} Предупреждений {check.warnings}</div>
     {check.List.map((c)=>{
               return <div>

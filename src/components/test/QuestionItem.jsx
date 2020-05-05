@@ -21,26 +21,25 @@ const QuestionItem=({editMode,question,
                {!editMode&&  <QField quest={question} showNumQuest={tp.showNumQuest}/>}
               <div>
               {editMode&&question.istextanswer&&<AFieldInputEdit quest={question} onEdit={editQuestion}/>}
-              {editMode&&question.ans.map((answers)=>{
+              {editMode&&<div className="answerlistedit">{question.ans.map((answers)=>{
                 return <AFieldEdit answer={answers} idQ={question.id} onEdit={editAnswer}
                             onDelete={()=>{deleteAnswer(question.id,answers.id)}}
                             onSavePic={(e)=>{saveAP(e,answers.id)}}
                             onDeletePic={()=>{deleteAnswerPhoto(answers.id)}} />
-                })
+                })}</div>
                }
-               {!editMode&&!question.istextanswer&&question.ans.map((answers)=>{
+               {!editMode&&!question.istextanswer&&<div className="answerlist">{question.ans.map((answers)=>{
                    return <AField answer={answers}
                                   onSelect={()=>{checkChoise(question.id,answers.id)}}
                                   win={question.win}
                                   type_levelgame={tp.type_levelgame}
                                   isChecked={question.isChecked}
                                   showNumAns={tp.showNumAns}
-                                  />})
+                                  />})}</div>
                   }
                   {!editMode&&question.istextanswer&& <AFieldInput quest={question} onInputAnswer={onInputAnswer}/>}
                 {editMode&&<QCommentField  quest={question} onEdit={editQuestion}/>}
               </div>
-     {/*editMode&& <button onClick={()=>{addNewAnswer(question.id)}}>Добавить вариант ответа</button>*/}
     </div>);
 
 }
@@ -63,15 +62,6 @@ const QFieldEdit=({editMode,quest,onEdit,onDel,saveQPhoto,deleteQuestionPhoto,cl
 return  <div className={className?className:"questionedit"}>
          <div id="pic">
             <LoadImage zoomer="true" width="100px" height="100px" img={quest.img} onLoad={saveQPhoto} onDel={()=>{deleteQuestionPhoto(quest.id)}}/>
-            {/*quest.img&&quest.img.replace(/\s+/g,' ').length>0&&
-                  <div>
-                     <img src={window.global.GLOBAL_PATH_SRC+quest.img}/>
-                     <button onClick={()=>{deleteQuestionPhoto(quest.id)}}>Удалить фото</button>
-                  </div>*/}
-            {/*!quest.img&&<div>
-              <input className="inputfile" type="file" name="image" id={"question"+quest.id} onChange={saveQPhoto}/>
-              <label for={"question"+quest.id}>Выберите файл </label>
-              </div>*/}
          </div>
         <div className="questiontext">
             <textarea onChange={(e)=>onEdit(quest.id,e.target.value)} value={quest.question} />
@@ -97,14 +87,13 @@ return <div>
 
 
 const AField=({answer,win,isChecked,type_levelgame,onSelect,showNumAns,className})=>{
-  return <div className={className?className:"answerlist"}>
-            <div id={answer.id}  onClick={onSelect}
+  return    <div id={answer.id}  onClick={onSelect}
                  className={"answeritem "+(answer.uch ? (type_levelgame&&win?"rightitem":(type_levelgame&&!win?"wrongitem":"itemselected")):(type_levelgame&&isChecked&&answer.truth?"rightitem":"item"))}>
                  <div className="nn">  {showNumAns&& (answer.num+". ")} </div>
                  <div className="pic">{answer.img&&<img src={window.global.GLOBAL_PATH_SRC+answer.img}/>}</div>
                  <div className="answer"> {answer.anstext}</div>
             </div>
-          </div>
+
 }
 
 
@@ -120,25 +109,19 @@ const AFieldInputEdit=({ansUserText,onEdit,className,quest})=>{
 
 const AFieldInput=({ansUserText,onInputAnswer,className,quest})=>{
   return <div className={className?className:"answerinputitem"}>
-                 <div className="answer">
+   <div className="answer">
                     <input type="text" value={quest.inputAnswer} onChange={(e)=>{onInputAnswer(e.target.value)}} type="input" />
                     <button onClick={()=>{onInputAnswer(null,true)}}>Ответить</button>
                  </div>
-          </div>
-}
+    </div>
+  }
 
 const AFieldEdit=({answer,className,onEdit,onDelete,onSavePic,onDeletePic,idQ})=>{
   return  <div className={className?className:"answerlistedit"}>{!answer.deleted&&
      <div className={answer.truth ? "answeredit rightitem":"answeredit"}>
       <div className={"pic"}>
       <LoadImage zoomer="true" width="100px" height="100px" img={answer.img} onLoad={onSavePic} onDel={()=>{onDeletePic(answer.id)}}/>
-      {/*answer.img&&<img src={window.global.GLOBAL_PATH_SRC+answer.img}/>*/}
-      {/*!answer.img&& <div>
-                     <input className="inputfile" type="file" name="image" id={"file"+answer.id} onChange={onSavePic}/>
-                     <label for={"file"+answer.id}>Выберите файл </label></div>*/}
-      {/*answer.img&&<button onClick={()=>{onDeletePic(answer.id)}}>Удалить фото</button>*/}
       </div>
-
       <div className="answer">
       <textarea onChange={(e)=>{onEdit(idQ,answer.id,e.target.value)}} type="input" value={answer.anstext} />
       </div>

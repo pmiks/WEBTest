@@ -34,7 +34,7 @@ a.mitem {
 	grid-gap: 0px;
 	grid-template-areas:
 		"hd hd hd hd"
-		"lp pg pg pg"
+		"pg pg pg pg"
 		"ft ft ft ft"
 	 ;
 }

@@ -3,23 +3,22 @@ import React,{useState,useEffect} from "react";
 import TestQuestion from '../test/QuestionItemConatainer';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import TestsList from './TestsListContainer'
+//import TestsList from './TestsListContainer'
 import TestsResult from './TestResult'
 import Paginator from '../../common/paginator';
 import QuestionResult from './QuestionResultContainer';
-import QuestionEditTools from './QuestionEditToolsContainer';
+//import QuestionEditTools from './QuestionEditToolsContainer';
 import TestEdit from './TestEditContainer.jsx';
 import NavPanel from './NavPanelContainer';
-import TicketsEdit from './TicketTestEditContainer';
+//import TicketsEdit from './TicketTestEditContainer';
 import TimerBlock from './TimerBlock';
 import Tickets from './TicketTestContainer';
-import TestCheck from './TestCheckContainer';
-import AlertWindow from './AlertWindowContainer';
+//import TestCheck from './TestCheckContainer';
+//import AlertWindow from './AlertWindowContainer';
 import {withRouter,Redirect,NavLink} from 'react-router-dom';
 
 
 import {getCurrentTestParamSEL} from '../../redux/test-selectors';
-//import {withAuthRedirect} from '../../common/myhocs';
 import {selectTestThunkCreator,
         setCurrentQuestionAC,
         addNewQuestionThunkCreator,
@@ -44,15 +43,17 @@ const TestPage=({match,idTest,editMode,list,currentQuestion,listlength,isDoneTes
   let setQ=(page,pc)=>{
      if (!tp.type_levelgame||editMode) setQuest(list[page-1].id);
    }
- return <div className={"testpage"} background-image={window.global.GLOBAL_PATH_SRC+"/images/system/unnamed.jpg"}>
-      <div>
-      {/*listlength<1&&<Redirect to={""}/>*/}
-
-      <TestsList/>
-
-      {(listlength>0)&&tp.type_levelgame&&list[currentQuestion].isChecked&&!flugTestIsOver&& <QuestionResult/>}
-
-      {(listlength>0)&&(tp.tickets.length===0)&&!flugTestIsOver&&(idTest>0)&&tp.testtime>0&&!editMode&&<TimerBlock secondstime={tp.testtime} onEndCount={testIsDone}/>}
+  let bi="";
+ if (tp) bi=window.global.GLOBAL_PATH_SRC+tp.coverimg;
+ return <div className={"testpage"} style={{"background-color": "transparent"}}>
+      <div className={"BackLayer"} style={{"background": `url("${bi}") 100% 100%`}}></div>
+      <div >
+      {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0||editMode)&&<div className="testname">
+           <div className="name">{tp.testname}</div>
+           <div className="time"><TimerBlock secondstime={tp.testtime} onEndCount={testIsDone}/></div>
+           </div>
+      }
+      {/*(listlength>0)&&(tp.tickets.length===0)&&!flugTestIsOver&&(idTest>0)&&tp.testtime>0&&!editMode&&<TimerBlock secondstime={tp.testtime} onEndCount={testIsDone}/>*/}
       {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0||editMode)&&<Paginator prevnext={editMode?true:false}
                         totalCount={listlength} startend={true}   pageSize={1}
                         currentPage={currentQuestion+1}
@@ -62,7 +63,8 @@ const TestPage=({match,idTest,editMode,list,currentQuestion,listlength,isDoneTes
       {(listlength>0)&&<NavPanel/>}
       {!editMode&&(idTest>0)&&(tp.tickets.length>0)&&<Tickets/>}
       {flugTestIsOver&&<TestsResult  list={list}/>}
-      <NavLink to={""}><button>На главную</button></NavLink>
+            {(listlength>0)&&tp.type_levelgame&&list[currentQuestion].isChecked&&!flugTestIsOver&& <QuestionResult/>}
+      <NavLink to={""}><div className="endtest">{!flugTestIsOver?"Прервать тест":"На главную"}</div></NavLink>
       </div>
   </div>;
 }

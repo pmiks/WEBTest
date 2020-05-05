@@ -2,20 +2,14 @@ import * as axios from 'axios';
 
 const instanceTV=axios.create({
 //  withCredentials:true,
-  baseURL:"http://192.168.1.141:1925/1/"
+  baseURL:"https://192.168.1.141:1925/1/"
   });
 
 
   const instanceTest=axios.create({
     withCredentials:true,
-    baseURL:"http://api.electricalab.ru/1.0/"
+    baseURL:"https://api.electricalab.ru/1.0/"
     });
-
-    // const instanceTest2=axios.create({
-    //   withCredentials:true,
-    //   baseURL:"http://api.electricalab.ru/1.0/"
-    //   });
-
 
 
 const instance=axios.create({

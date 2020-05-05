@@ -9,7 +9,7 @@ constructor(props){
 }
 
 componentDidMount(){
-    this.startTimer(this.props.secondstime,this.props.onEndCount);
+    if (this.props.secondstime>0) this.startTimer(this.props.secondstime,this.props.onEndCount);
 }
 
 startTimer=(timeL,onEndCount=null)=>{
@@ -28,7 +28,7 @@ startTimer=(timeL,onEndCount=null)=>{
 
 
 render=()=>{
-  return <TimerDisplay timer={this.state.timeLeft}/>
+  return (this.props.secondstime>0)?<TimerDisplay timer={this.state.timeLeft}/>:<></>
 }
 
 

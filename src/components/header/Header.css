@@ -1,8 +1,10 @@
 .line{
+  white-space: nowrap;
   display: grid;
-  grid-template-columns: 3fr 9fr 3fr 1fr;
+  grid-template-columns: 1fr 1fr 3fr 1fr;
   align-items: center;
-  justify-items:left;
+  justify-items:right;
+  overflow-y: hidden;
 }
 
 

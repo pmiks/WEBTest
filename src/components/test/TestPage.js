@@ -46,8 +46,8 @@ const TestPage=({idTest,editMode,list,currentQuestion,listlength,isDoneTest,
       <div className="menu">
       <AlertWindow/>
       <TestCheck/>
-      {(idTest>-1)&&<TicketsEdit/>}
       <QuestionEditTools/>
+      {(idTest>-1)&&<TicketsEdit/>}
       </div>
       <div>
       <TestsList/>

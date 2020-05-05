@@ -14,8 +14,10 @@ export const getAuthInfoThunkCreator=()=>{
       {
         if (response.status===200)
           //console.log(response.data);
-           dispatch(setMyAuthDataAC(response.data,true));
-        });
+           dispatch(setMyAuthDataAC(response.data,true))
+           else return false;
+        })
+//        .finally(()=>{return false});
           //let {id,login,email}=response.data.data;
 //          dispatch(setMyAuthDataAC(id,login,email,true));
 //      }
@@ -41,7 +43,6 @@ export const logoutTC=()=>{
  return (dispatch)=>{
     authTAPI.logout().then(response=>
       {
-        debugger;
         if (response.data.result===0) {
           dispatch(setMyAuthDataAC({access_token:null,first_name:null,iduser:null,last_name:null, photo:null},false));
       }
@@ -64,7 +65,7 @@ export let reducerAuthVK=(state=Me,action)=>{
   switch (action.type) {
     case SET_MY_AUTH_DATA:
         debugger;
-        return{
+        return{...state,
           ...action.mydata,
           isAuth:action.isAuth
         };

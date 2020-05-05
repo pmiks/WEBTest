@@ -10,9 +10,9 @@ import * as serviceWorker from './serviceWorker';
 
 
 //let drawScene=()=>{
-// return  
+// return
   ReactDOM.render(
-          <BrowserRouter>
+          <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Provider store={Store}>
               <App store={Store} />
             </Provider>
