@@ -24,7 +24,7 @@ import {getCurrentTestParamSEL} from '../../redux/test-selectors';
 import {selectTestThunkCreator,
         setCurrentQuestionAC,
         addNewQuestionThunkCreator,
-        onEditModeAC,
+//        onEditModeAC,
         offEditModeAC,
         getTestsListThunkCreator,
         loadQuestionThunkCreator,
@@ -91,7 +91,7 @@ let mapStateToProps=(state)=>{
 export default compose(
     connect(mapStateToProps,{
 //      onSave:saveThunkCreator,
-      onEditMode:onEditModeAC,
+//      onEditMode:onEditModeAC,
       offEditMode:offEditModeAC,
       addQuest:addNewQuestionThunkCreator,
       getTestsList:getTestsListThunkCreator,

@@ -20,7 +20,7 @@ import Preloader from './common/preloader';
 import Header from './components/header/Header'
 import TestList from './components/test/mainpage_container';
 import Test           from './components/test/Test';
-
+import TestResult   from './components/test/TestResultContainer';
 const GLOBAL_PATH_SRC="https://api.electricalab.ru/";
 
 window.global = {GLOBAL_PATH_SRC};
@@ -50,9 +50,11 @@ render(){
        <Switch>
          <Route path='/edittest' render={()=><TestPage/>}/>
          <Route path='/test/:testid?' render={()=><Test/>}/>
+         <Route path='/testresult/:testsession?' render={()=><TestResult/>}/>
          <Route path='/' render={()=><TestList/>}/>
          <Redirect to="/public"/>
        </Switch>
+       <div className="Footer"></div>
        </div>
     </div>
      );

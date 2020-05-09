@@ -12,7 +12,7 @@ const Paginator=({totalCount,pageSize,currentPage,onClick,prevnext,startend})=>{
 
   let pagesCount=Math.ceil(totalCount/pageSize);
   let pages=[];
-  let sizeframe=16;
+  let sizeframe=10;
   let  minPView=currentPage>Math.ceil(sizeframe/2)?currentPage-Math.ceil(sizeframe/2):1;
   let  maxPView=currentPage<=pagesCount-Math.ceil(sizeframe/2)?minPView+sizeframe-1:pagesCount;
   minPView=maxPView-(sizeframe-1);

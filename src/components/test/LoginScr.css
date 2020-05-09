@@ -1,3 +1,16 @@
+
+@media (orientation: portrait) {
+  .btn img{
+    height:20px;
+  }
+}
+
+@media (orientation: landscape) {
+  .btn img{
+    height:30px;
+  }
+}
+
 .Login {
   display: grid;
   grid-template-columns:  1fr 1fr;
@@ -40,7 +53,6 @@
 .btn a{ text-decoration: none; }
 
 .btn img{
-  height:30px;
   vertical-align: middle;
   border-radius: 100px; /* Радиус скругления */
   border: 1px solid  #b05d1e; /* Параметры рамки */

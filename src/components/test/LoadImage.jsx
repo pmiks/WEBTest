@@ -5,10 +5,10 @@ const LoadImage=({img,id,onDel,onLoad,height,width,zoomer,alter})=>{
   const [showBig, setShowBig] = useState(false);
 
   return <div className={"pic"}>
-  {img&&<img style={{height: "auto", width: "auto", "max-width": `${width}`, "max-height": `${height}`}}
+  {img&&<img style={{ "max-width": `"${width}"`, "max-height": `"${height}"`}}
     src={window.global.GLOBAL_PATH_SRC+img}
     onClick={()=>{setShowBig(true)}}/>}
-    {alter&&!img&&<img style={{height: "auto", width: "auto", "max-width": `${width}`, "max-height": `${height}`}}
+    {alter&&!img&&<img style={{height: "auto", width: "auto", "max-width": `"${width}"`, "max-height": `"${height}"`}}
       src={window.global.GLOBAL_PATH_SRC+"/images/system/unnamed.jpg"}
       onClick={()=>{setShowBig(true)}}/>}
 

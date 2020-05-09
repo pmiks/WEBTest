@@ -9,7 +9,7 @@ const TestsList=(props)=>{
   }
   let editTest=(id)=>{
       props.selectTest(id);
-      props.onEditMode();
+      props.editModeON();
   }
   return (props.idTest<=0)&&<div className="testlist">{props.testslist&& props.testslist.map(
     l=>{/*if (props.editMode||l.published)*/

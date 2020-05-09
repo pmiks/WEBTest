@@ -121,6 +121,10 @@ saveTestCoverImg(idT,file){
   return instanceTest.post(`test/img/${idT}`,formData,{ headers:{'Content-Type':'multipart/form-data'}} );
 },
 
-getAllAnswers(id){ return instanceTest.get(`getallanswers/${id}`) }
+getAllAnswers(id){ return instanceTest.get(`getallanswers/${id}`) },
+
+sendUResultQ(data){ return instanceTest.post(`addurq`,data) },
+
+testdone(session) {return instanceTest.patch(`testdone/${session}`)} 
 
 }

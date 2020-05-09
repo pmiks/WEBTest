@@ -1,16 +1,15 @@
 import {authTAPI} from '../api/api';
-import {stopSubmit} from 'redux-form';
+//import {stopSubmit} from 'redux-form';
 
 const SET_MY_AUTH_DATA="SET_MY_AUTH_DATA";
 
-
-export const setMyAuthDataAC=(mydata,isAuth)=>({type:SET_MY_AUTH_DATA,mydata:mydata,isAuth:isAuth});
+export const setMyAuthDataAC=(mydata:Me,isAuth:boolean)=>({type:SET_MY_AUTH_DATA,mydata:mydata,isAuth:isAuth});
 
 
 export const getAuthInfoThunkCreator=()=>{
- return (dispatch)=>{
+ return (dispatch:any)=>{
    debugger;
-    return authTAPI.getAuthInfo().then(response=>
+    return authTAPI.getAuthInfo().then((response:any)=>
       {
         if (response.status===200)
           //console.log(response.data);
@@ -40,8 +39,8 @@ export const getAuthInfoThunkCreator=()=>{
 // }
 
 export const logoutTC=()=>{
- return (dispatch)=>{
-    authTAPI.logout().then(response=>
+ return (dispatch:any)=>{
+    authTAPI.logout().then((response:any)=>
       {
         if (response.data.result===0) {
           dispatch(setMyAuthDataAC({access_token:null,first_name:null,iduser:null,last_name:null, photo:null},false));
@@ -52,19 +51,28 @@ export const logoutTC=()=>{
 
 
 
-let Me={
+let me={
   iduser:null,
   first_name:null,
   last_name:null,
   photo:null,
+  access_token:null,
   isAuth:false
 };
 
+interface Me{
+  iduser:string|null,
+  first_name:string|null,
+  last_name:string|null,
+  photo:string|null,
+  access_token:string|null
+//  isAuth:boolean
+};
 
-export let reducerAuthVK=(state=Me,action)=>{
+
+export let reducerAuthVK=(state=me,action:any)=>{
   switch (action.type) {
     case SET_MY_AUTH_DATA:
-        debugger;
         return{...state,
           ...action.mydata,
           isAuth:action.isAuth

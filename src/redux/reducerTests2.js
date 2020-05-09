@@ -23,7 +23,7 @@ const TOGGLE_IS_SINCHRONIZING='TOGGLE_IS_SINCHRONIZING';
 const NEXT_QUESTION='NEXT_QUESTION';
 const PREV_QUESTION='PREV_QUESTION';
 
-const ON_EDIT_MODE='ON_EDIT_MODE';
+const EDIT_MODE_ON='EDIT_MODE_ON';
 const OFF_EDIT_MODE='OFF_EDIT_MODE';
 const GET_QUESTION='GET_QUESTION';
 const GET_TESTS_LIST='GET_TESTS_LIST';
@@ -61,7 +61,7 @@ export const checkChoiseAC=()=>({type:CHECK_CHOICE});
 export const _nextQuestionAC=()=>({type:NEXT_QUESTION});
 export const prevQuestionAC=()=>({type:PREV_QUESTION});
 
-export const onEditModeAC=()=>({type:ON_EDIT_MODE});
+export const editModeONAC=()=>({type:EDIT_MODE_ON});
 export const offEditModeAC=()=>({type:OFF_EDIT_MODE});
 
 export const toggleIsSynchroAC=(isSynchro)=>({type:TOGGLE_IS_SINCHRONIZING,isSynchro:isSynchro});
@@ -122,6 +122,8 @@ export const setAllAnswers=(data)=>({type:SET_ALL_ANSWERS,data:data});
 const SET_TEST_COVER_IMG='SET_TEST_COVER_IMG';
 export const setTestCoverImageAC=(img)=>({type:SET_TEST_COVER_IMG,img:img});
 
+const ADD_USER_RESULT_QUESTION='ADD_USER_RESULT_QUESTION';
+export const addUResultQAC=()=>({type:ADD_USER_RESULT_QUESTION});
 
 export const publicateTC=()=>{
   return (dispatch)=>{
@@ -198,7 +200,12 @@ export const onInputAnswerTC=(data=null,send=false)=>{
   return (dispatch)=>{
       dispatch(onInputAnswerAC(data,send));
       dispatch(checkChoiseAC());
-      if (send) dispatch(sendStatAC());
+      if (send) {
+        dispatch(setCurrentAnswerAC(-1));
+        dispatch(sendStatAC());
+        dispatch(addUResultQAC());
+      }
+
   }
 }
 
@@ -325,22 +332,22 @@ return (dispatch)=>{
   dispatch(setUserChoiseAnswerAC());
   dispatch(checkChoiseAC());
   dispatch(sendStatAC());
+  dispatch(addUResultQAC());
   }
 }
 
 export const addNewQuestionThunkCreator=(idtest,text='Новый вопрос',img=null,multichoise=false)=>{
 return (dispatch)=>{
-  //dispatch(toggleIsSynchroAC(true));
-//  testAPI.addQuestion(idtest,{question:text,img:img,multichoise:multichoise})
-//  .then(response=>
-//      {
-//          if (response.status===201){
             dispatch(addNewQuestionAC(idRandom(),text,img,multichoise));
-//            dispatch(toggleIsSynchroAC(false));
-//          }
-//        });
   }
 }
+
+export const sendUResultQTC=(idtest,text='Новый вопрос',img=null,multichoise=false)=>{
+return (dispatch)=>{
+            dispatch(addUResultQAC());
+  }
+}
+
 
 export const deleteQuestionThunkCreator=(id=-1)=>{
 return (dispatch)=>{
@@ -556,6 +563,8 @@ export const reducerTests=(state=initState,action)=>{
       }
     }
     case TEST_IS_DONE:
+    console.log(action.isDone);
+    if (action.isDone) testAPI.testdone(state.sessionID);
       return{...state,
         testresult:{...state.testresult,
                       isDoneTest:action.isDone
@@ -576,7 +585,7 @@ export const reducerTests=(state=initState,action)=>{
     let shuffleTest=cT.shuffleQuestion&&!state.editMode?shuffle(addAnsw,cT.limit_quest):addAnsw;
     return {...state,
        list:shuffleTest.map((q,i)=>{
-         return{...q,num:i+1,inputAnswer:"",ans:(cT.shuffleAnswer&&!state.editMode?shuffle(q.ans):q.ans).map((a,j)=>{return{...a,num:j+1}})}}),
+         return{...q,num:i+1,inputAnswer:"",ans:(cT.shuffleAnswer&&!state.editMode?shuffle(q.ans):q.ans).map((a,j)=>{return{...a,score:a.truth?1:(a.score?a.score:0),num:j+1}})}}),
        currentQuestion:shuffleTest.length>0?0:-1,
        questionID:shuffleTest.length>0?shuffleTest[0]:null,
        currentAnswer:-1,
@@ -595,8 +604,10 @@ export const reducerTests=(state=initState,action)=>{
           }
 
   case SELECT_TEST:
-      debugger;
-     return {...state, idTest:action.testid, currTest:state.testslist.findIndex((q,i)=>q.id==action.testid)}
+      return {...state,
+          sessionID:"T"+action.testid+"t"+Date.now()+"r"+Math.abs(idRandom()),
+          idTest:action.testid,
+          currTest:state.testslist.findIndex((q,i)=>q.id==action.testid)}
   case GET_TESTS_LIST:
        return {...state,
           idTest:-1,
@@ -663,7 +674,7 @@ export const reducerTests=(state=initState,action)=>{
             list:state.list.map((q,id)=>{
                 if (id!=state.currentQuestion) return q;
                            return {...q,
-                                 question:action.text!==null?action.text:q.text,
+                                 question:action.text!==null?action.text:q.question,
                                  idtest:state.idTest,
                                  img:action.img!==null?action.img:q.img,
                                  comment:action.comment!==null?action.comment:q.comment,
@@ -733,7 +744,7 @@ case SET_NEW_TICKET_ID:
   case TOGGLE_IS_SINCHRONIZING:
     return {...state,
       isSynchronizing:action.isSynchro}
-  case ON_EDIT_MODE: return {...state,editMode:true}
+  case EDIT_MODE_ON: return {...state,editMode:true}
   case OFF_EDIT_MODE:return {...state,editMode:false}
   case NEXT_QUESTION:
     let cQ1=state.currentQuestion==state.list.length-1?state.currentQuestion:state.currentQuestion+1;
@@ -804,6 +815,7 @@ case SET_NEW_TICKET_ID:
       let cTik=state.testslist[state.currTest].tickets.findIndex(t=>t.id=action.id)
       return {...state,
           dataIsChanged:true,
+          currentTicket:action.id,
           list:state.list.filter(l=>state.testslist[state.currTest].tickets[cTik].questions.some(t=>t==l.id)),
           testslist:state.testslist.map((t,i)=>i==state.currTest?{...t,tickets:[]}:t)
       }
@@ -832,10 +844,40 @@ case SET_NEW_TICKET_ID:
     case SHOW_ALERT_WINDOW:
       console.log("Закрыть окно",action.show);
       return{...state,flugShowAlertWindow:action.show,messageAlertWindow:action.show?state.messageAlertWindow:""}
-
-
     case UNLOAD_FLUG_ON:return{...state,idTest:-1}
-
+    case ADD_USER_RESULT_QUESTION:
+    let currQ=state.list[state.currentQuestion]
+    let ra=currQ.ans.filter(a=>a.truth)
+    let resQ={
+      idtest:state.idTest,
+      idquestion:state.questionID,
+      idanswer:state.answerID,
+      idticket:state.currentTicket,
+      inputtext:currQ.inputAnswer,
+      time_session:"",
+      result:currQ.win,
+      session:state.sessionID,
+      score:state.currentAnswer>-1?currQ.ans[state.currentAnswer].score:(currQ.win?1:0),
+      resFill:state.currentAnswer!=-1?{imgQ:currQ.img,question:currQ.question,
+                 imgAR:ra[0]?ra[0].img:null,
+                 anstextR:ra[0]?ra[0].anstext:null,
+                 imgAU:currQ.ans[state.currentAnswer].img,
+                 anstextU:currQ.ans[state.currentAnswer].anstext,
+                 statT:currQ.selectcounter,
+                 statU:currQ.ans[state.currentAnswer].selectcounter,
+                 statR:ra[0]?ra[0].selectcounter:null
+               }:
+              {imgQ:currQ.img,question:currQ.question,imgAR:null,anstextR:(currQ.textanswer.split('/'))[0],imgAU:null,anstextU:currQ.inputAnswer,
+                  statT:currQ.selectcounter,
+                  statU:ra[0]?currQ.selectcounter-ra[0].answerinputcounter:null,
+                  statR:ra[0]?ra[0].answerinputcounter:null
+                  }
+    };
+//console.log(state.list[state.currentQuestion].ans[state.currentAnswer].score);
+    testAPI.sendUResultQ(resQ);
+    return { ...state,
+      testresult:{...state.testresult,resquestion:[...state.testresult.resquestion,resQ]}
+    }
     case CHECK_TEST:
     debugger;
     let errorQuestion=state.list.map(q=>({
@@ -849,7 +891,6 @@ case SET_NEW_TICKET_ID:
           emptyAnswer:!q.istextanswer&&q.ans.some(a=>a.anstext.length<3),
           emptyInputAnswer:q.istextanswer&&!q.textanswer
     })).filter(q=>q.emptyAnswer||q.notrightansw||q.notuniqueAnswer||q.emptyInputAnswer||q.colansw||q.notchoice||q.notalter)
-
       return{...state,
         check:{
           List:errorQuestion,

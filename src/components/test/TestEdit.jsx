@@ -7,7 +7,7 @@ const TestEdit=({tp,setTP,saveTestCoverImg,deleteTestCoverImg})=>{
 
   let saveTCI=(e,id)=>{alert(id); if(e.target.files.length) saveTestCoverImg(id,e.target.files[0]);  }
   return <div className="testedit">
-      <div><LoadImage zoomer="true" id={"test"+tp.id} width="200px" height="100px" img={tp.coverimg} onLoad={(e)=>{saveTCI(e,tp.id)}} onDel={()=>{deleteTestCoverImg(tp.id)}}/></div>
+      <div><LoadImage zoomer="true" id={"test"+tp.id} width="100px" height="100px" img={tp.coverimg} onLoad={(e)=>{saveTCI(e,tp.id)}} onDel={()=>{deleteTestCoverImg(tp.id)}}/></div>
       <div><label>Название теста</label>
            <input value={tp.testname} type="input" onChange={(e)=>{setTP({...tp,testname:e.currentTarget.value})}}/></div>
       <div><label>Количество вариантов ответов по умолчанию</label>
@@ -43,6 +43,10 @@ const TestEdit=({tp,setTP,saveTestCoverImg,deleteTestCoverImg})=>{
            <input checked={tp.shuffleQuestion} onChange={(e)=>{setTP({...tp,shuffleQuestion:e.target.checked})}} type="checkbox"/></div>
       <div><label className="checktype">Сортировать ответы в случайном порядке</label>
            <input checked={tp.shuffleAnswer} onChange={(e)=>{setTP({...tp,shuffleAnswer:e.target.checked})}} type="checkbox"/></div>
+     <div><label className="checktype">Показывать в фоне теста обложку</label>
+          <input checked={tp.isbackground} onChange={(e)=>{setTP({...tp,isbackground:e.target.checked})}} type="checkbox"/></div>
+
+
   </div>
 }
 

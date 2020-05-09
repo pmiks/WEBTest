@@ -1,66 +1,133 @@
-/* Заголовок теста--------------------------------------*/
-.testname{  display: grid; grid-template-columns:  1fr auto; margin-top: 20px;
-  margin-bottom: 50px; margin-left: 0; margin-right: 0; background: gray;
-  padding: 2px 50px; color: white; opacity: 0.5; align-items: center;grid-gap: 50px
-}
 
-.testname>.name{ font-size: 30px; font-weight: bold; text-align: left; }
 
-.testname>.time{ font-size: 20px; font-weight: bold; text-align: right;}
+@media (orientation: portrait) {
+  /* Заголовок теста--------------------------------------*/
+  .testname{  display: grid; grid-template-columns:  1fr auto; margin-top: 30px;
+    margin-bottom: 30px; margin-left: 0; margin-right: 0; background: gray;
+    padding: 2px 20px; color: white; opacity: 0.7; align-items: center;grid-gap: 20px
+  }
 
-/* Блок вопроса--------------------------------------*/
-.question{
-    padding: 2%;
-    margin-top: 10pt;
-    color:black;
-    background-color: white;
-    border: 1px dotted grey;
+  .testname>.name{ font-size: 16px; font-weight: bold; text-align: left; }
+
+  .testname>.time{ font-size: 16px; font-weight: bold; text-align: right;}
+
+  /* Блок вопроса--------------------------------------*/
+  .question{
+      padding: 10px;
+      margin-top: 10pt;
+      color:black;
+      background-color: white;
+      border: 1px dotted grey;
+      border-radius: 1px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5);
+      bottom:  10%;
+  }
+  /* Поле вопроса--------------------------------------*/
+  .questionitem{height: 100%;align-items: center; display: block;align-self: flex-end;}
+  .questionitempic{align-items: center; display: block;}
+  .questionitempic>img{ width: 70%;max-height:200px ;border: 1px solid grey;}
+  .questionitem>div{margin:10px; font-size: 12pt; font-weight: bold; display: inline-block;}
+
+  /* Поле ответа--------------------------------------*/
+
+  .answerlist{ display: grid; grid-template-columns: 1fr; grid-gap: 6px; background-color: inherit;margin-top: 25px;;}
+  .answerlist >.answeritem{
+    text-align: left;
+    padding: 4px 15px;
+    border: 1px solid red;
+    color:#ffffff;
     border-radius: 1px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    bottom:  10%;
+    background-color: #211f1f;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(3,minmax(min-content,max-content));
+    grid-auto-rows: minmax(min-content,max-content);
+    font-size: 12pt; font-weight: bold;
+  }
+  .answerlist >.answeritem>.pic{ width:100%}
+  .answerlist >.answeritem>.pic img{height: 50px}
+  .answerlist >.answeritem>.nn{}
+  .answerlist >.ansselector{}
+  .answerlist >.item{}
+  .answerlist >.item:hover{ color:black; background-color: #858181; box-shadow:  0 0 25px rgba(0,130,255,1);}
+  .answerlist >.itemselected{ color:#ffffff;  background-color: blue;  box-shadow: 0 0 25px rgba(255,0,0,1);}
+  .answerlist >.itemselected:hover{ color:#000000; background-color: #858181; box-shadow: 0 0 25px rgba(255,0,0,1);}
+  .answerlist >.wrongitem{ background-color: red; box-shadow: 0 0 25px rgba(255,0,0,1);}
+  .answerlist >.rightitem{ background-color: green; box-shadow: 0 0 25px rgba(0,255,0,1); }
+
+
+  /* Поле ввода ответа-------------------------------------*/
+  .answerinputitem{ font-family: "Arial"; background-color: #211f1f;  color:#ffffff;  padding: 20px;}
+
+  .answerinputitem input{ height: 1em; font-size: 16pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit;text-align: center; margin-bottom: 15px}
+
+  /* -------------------------------------------------------*/
 }
-/* Поле вопроса--------------------------------------*/
-.questionitem{height: 100%;align-items: center; display: block;align-self: flex-end;}
-.questionitempic{align-items: center; display: block;}
-.questionitempic>img{ height: 200px; border: 1px solid grey;}
-.questionitem>div{margin:20px; font-size: 20pt; font-weight: bold; display: inline-block;}
+@media (orientation: landscape) {
+  /* Заголовок теста--------------------------------------*/
+  .testname{  display: grid; grid-template-columns:  1fr auto; margin-top: 20px;
+    margin-bottom: 50px; margin-left: 0; margin-right: 0; background: gray;
+    padding: 2px 50px; color: white; opacity: 0.5; align-items: center;grid-gap: 50px
+  }
 
-/* Поле ответа--------------------------------------*/
+  .testname>.name{ font-size: 30px; font-weight: bold; text-align: left; }
 
-.answerlist{ display: grid; grid-template-columns: 1fr; grid-gap: 4px; background-color: inherit;;}
+  .testname>.time{ font-size: 20px; font-weight: bold; text-align: right;}
 
-.answerlist >.answeritem{
-  text-align: left;
-  padding: 4px 40px;
-  border: 1px solid red;
-  color:#ffffff;
-  border-radius: 1px;
-  background-color: #211f1f;
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(3,minmax(min-content,max-content));
-  grid-auto-rows: minmax(min-content,max-content);
-  font-size: 16pt; font-weight: normal;
+  /* Блок вопроса--------------------------------------*/
+  .question{
+      padding: 2%;
+      margin-top: 10pt;
+      color:black;
+      background-color: white;
+      border: 1px dotted grey;
+      border-radius: 1px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.5);
+      bottom:  10%;
+  }
+  /* Поле вопроса--------------------------------------*/
+  .questionitem{height: 100%;align-items: center; display: block;align-self: flex-end;}
+  .questionitempic{align-items: center; display: block;}
+  .questionitempic>img{ max-width: 100% ;height: 200px; border: 1px solid grey;}
+  .questionitem>div{margin:20px; font-size: 20pt; font-weight: bold; display: inline-block;}
+
+  /* Поле ответа--------------------------------------*/
+
+  .answerlist{ display: grid; grid-template-columns: 1fr; grid-gap: 4px; background-color: inherit;;}
+
+  .answerlist >.answeritem{
+    text-align: left;
+    padding: 4px 40px;
+    border: 1px solid red;
+    color:#ffffff;
+    border-radius: 1px;
+    background-color: #211f1f;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(3,minmax(min-content,max-content));
+    grid-auto-rows: minmax(min-content,max-content);
+    font-size: 16pt; font-weight: normal;
+  }
+  .answerlist >.answeritem>.pic{ width:100%}
+  .answerlist >.answeritem>.pic img{height: 50px}
+  .answerlist >.answeritem>.nn{}
+  .answerlist >.ansselector{}
+  .answerlist >.item{}
+  .answerlist >.item:hover{ color:black; background-color: #858181; box-shadow:  0 0 25px rgba(0,130,255,1);}
+  .answerlist >.itemselected{ color:#ffffff;  background-color: blue;  box-shadow: 0 0 25px rgba(255,0,0,1);}
+  .answerlist >.itemselected:hover{ color:#000000; background-color: #858181; box-shadow: 0 0 25px rgba(255,0,0,1);}
+  .answerlist >.wrongitem{ background-color: red; box-shadow: 0 0 25px rgba(255,0,0,1);}
+  .answerlist >.rightitem{ background-color: green; box-shadow: 0 0 25px rgba(0,255,0,1); }
+
+
+  /* Поле ввода ответа-------------------------------------*/
+  .answerinputitem{ font-family: "Arial"; background-color: #211f1f;  color:#ffffff;  padding: 20px;}
+
+  .answerinputitem input{ height: 1em; font-size: 16pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit;text-align: center; margin-bottom: 15px}
+
+  /* -------------------------------------------------------*/
+
 }
-.answerlist >.answeritem>.pic{ width:100%}
-.answerlist >.answeritem>.pic img{height: 50px}
-.answerlist >.answeritem>.nn{}
-.answerlist >.ansselector{}
-.answerlist >.item{}
-.answerlist >.item:hover{ color:black; background-color: #858181; box-shadow:  0 0 25px rgba(0,130,255,1);}
-.answerlist >.itemselected{ color:#ffffff;  background-color: blue;  box-shadow: 0 0 25px rgba(255,0,0,1);}
-.answerlist >.itemselected:hover{ color:#000000; background-color: #858181; box-shadow: 0 0 25px rgba(255,0,0,1);}
-.answerlist >.wrongitem{ background-color: red; box-shadow: 0 0 25px rgba(255,0,0,1);}
-.answerlist >.rightitem{ background-color: green; box-shadow: 0 0 25px rgba(0,255,0,1); }
-
-
-/* Поле ввода ответа-------------------------------------*/
-.answerinputitem{ font-family: "Arial"; background-color: #211f1f;  color:#ffffff;  padding: 20px;}
-
-.answerinputitem input{ height: 1em; font-size: 16pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit;text-align: center; margin-bottom: 15px}
-
-/* -------------------------------------------------------*/
-
 /* Блокирующий экран--------------------------------------*/
 .BlockLayer{ right: 0; left:0; top:0; bottom:0;
   display: block;
@@ -259,52 +326,7 @@
 .testedit input{ justify-self: stretch;  align-self: center; font-size: 12pt; padding: 1px;  margin: 5px;}
 .testedit>.checktype{ justify-content:flex-start; grid-column: 1/3;}
 
-/*Форма результата теста*/
-.testres{
-  display: grid;
-  grid-auto-columns: minmax(min-content,max-content);
-  grid-row-gap: 5px;
-  color: black;
-/*  background-color: purple;*/
-  padding: 5px;
-  box-shadow: 0 0 50px rgba(55,55,55,1);
-  justify-items:stretch;
 
-}
-
-.num{ grid-area: n;  width: 30px;}
-.qimg{  grid-area: qi;  width: 100px;  justify-self: left;  align-self:  center;}
-.questtext{  background-color: white;  grid-area: q;}
-.testres>div.item{
-  grid-template-areas:
-    "n qi q  q"
-    "n qi ra wa"
-     ;
-  grid-template-columns: 30px 150px 1fr 1fr;
-  background-color: orange;
-  padding: 5px;
-  border: 1px solid black;
-  display: grid;
-  grid-gap: 5px;
-  justify-self:stretch;
-}
-.testres img{  height: 50px;}
-.finalresult{  font-size: 20pt; font-weight: 700;}
-
-.wrightresult{
-  grid-area: ra;
-  padding: 5px;
-  text-align: left;
-  background-color: red;
-  color: white;
-}
-.wrongresult{
-  grid-area: wa;
-  padding: 5px;
-  text-align: left;
-  background-color: green;
-  color: white;
-}
 
 /*Cписок билетов еdit*/
 .TicketsEdit{ display: grid;  grid-gap: 5px;  grid-template-columns:  1fr;  margin: 5px;  position:relative;

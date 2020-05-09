@@ -8,7 +8,7 @@ import {getCurrentTestSEL,getCurrentTestParamSEL} from '../../redux/test-selecto
 
 import {
 //  saveThunkCreator,
-  onEditModeAC,
+  editModeONAC,
   offEditModeAC,
   addNewQuestionThunkCreator,
   loadQuestionThunkCreator,
@@ -78,7 +78,7 @@ export default compose(
 //      Save:saveThunkCreator,
       publicate:publicateTC,
       addTicket:addTicketAC,
-      onEditMode:onEditModeAC,
+      editModeON:editModeONAC,
       offEditMode:offEditModeAC,
       addQuest:addNewQuestionThunkCreator,
       onNext:_nextQuestionAC,

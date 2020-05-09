@@ -64,10 +64,16 @@ export const initState={
     wrongpermissible:1
   },
   flugShowTicketList:false,
+  currentTicket:-1,
+  sessionID:null,
   currentQuestion:-1,
   currentAnswer:-1,
   allIsChecked:false,
   isSynchronizing:false,
   editMode:false,
-  testresult:{allIsChecked:false,isDoneTest:false},
+  testresult:{
+    resquestion:[],
+    allIsChecked:false,
+    isDoneTest:false
+  },
 };

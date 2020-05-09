@@ -4,7 +4,7 @@ import TestQuestion from '../test/QuestionItemConatainer';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 //import TestsList from './TestsListContainer'
-import TestsResult from './TestResult'
+import TestsResult from './TestResultContainer'
 import Paginator from '../../common/paginator';
 import QuestionResult from './QuestionResultContainer';
 //import QuestionEditTools from './QuestionEditToolsContainer';
@@ -22,7 +22,7 @@ import {getCurrentTestParamSEL} from '../../redux/test-selectors';
 import {selectTestThunkCreator,
         setCurrentQuestionAC,
         addNewQuestionThunkCreator,
-        onEditModeAC,
+//        onEditModeAC,
         offEditModeAC,
         getTestsListThunkCreator,
         loadQuestionThunkCreator,
@@ -44,26 +44,37 @@ const TestPage=({match,idTest,editMode,list,currentQuestion,listlength,isDoneTes
      if (!tp.type_levelgame||editMode) setQuest(list[page-1].id);
    }
   let bi="";
- if (tp) bi=window.global.GLOBAL_PATH_SRC+tp.coverimg;
+  let isbg=false;
+ if (tp) {
+     bi=window.global.GLOBAL_PATH_SRC+tp.coverimg;
+     isbg=tp.isbackground
+   }
  return <div className={"testpage"} style={{"background-color": "transparent"}}>
-      <div className={"BackLayer"} style={{"background": `url("${bi}") 100% 100%`}}></div>
-      <div >
+{/*Фоновая картинка теста*/}
+      {isbg&&<div className={"BackLayer"} style={{"background": `url("${bi}") 100% 100%`}}></div>}
+      <div>
+{/*Заголовок и таймер теста*/}
       {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0||editMode)&&<div className="testname">
            <div className="name">{tp.testname}</div>
            <div className="time"><TimerBlock secondstime={tp.testtime} onEndCount={testIsDone}/></div>
            </div>
       }
-      {/*(listlength>0)&&(tp.tickets.length===0)&&!flugTestIsOver&&(idTest>0)&&tp.testtime>0&&!editMode&&<TimerBlock secondstime={tp.testtime} onEndCount={testIsDone}/>*/}
+{/*Показат Pagenator*/}
       {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0||editMode)&&<Paginator prevnext={editMode?true:false}
                         totalCount={listlength} startend={true}   pageSize={1}
                         currentPage={currentQuestion+1}
                         onClick={setQ}/>}
+{/*Показат текущий вопрос*/}
       {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0||editMode)&&<TestQuestion/>}
-      {/*!flugTestIsOver&&<TestQuestion/>*/}
+{/*Показать кнопки "вперед" "назад"*/}
       {(listlength>0)&&<NavPanel/>}
+{/*Показат варианты билетов*/}
       {!editMode&&(idTest>0)&&(tp.tickets.length>0)&&<Tickets/>}
+{/*Показать результат теста*/}
       {flugTestIsOver&&<TestsResult  list={list}/>}
+{/*Показать результат ответа на вопрос*/}
             {(listlength>0)&&tp.type_levelgame&&list[currentQuestion].isChecked&&!flugTestIsOver&& <QuestionResult/>}
+{/*Кнопка возврата на главную старницу*/}
       <NavLink to={""}><div className="endtest">{!flugTestIsOver?"Прервать тест":"На главную"}</div></NavLink>
       </div>
   </div>;
@@ -72,9 +83,7 @@ const TestPage=({match,idTest,editMode,list,currentQuestion,listlength,isDoneTes
 
 let mapStateToProps=(state)=>{
       return{
-//        flugShowTicketList:state.Tests.flugShowTicketList,
         tp:getCurrentTestParamSEL(state),
-//        questiontime:getCurrentTestParamSEL(state).questiontime,
         currentQuestion:state.Tests.currentQuestion,
         currentAnswer:state.Tests.currentAnswer,
         editMode:state.Tests.editMode,
@@ -88,8 +97,7 @@ let mapStateToProps=(state)=>{
 
 export default compose(
     connect(mapStateToProps,{
-//      onSave:saveThunkCreator,
-      onEditMode:onEditModeAC,
+//      onEditMode:onEditModeAC,
       offEditMode:offEditModeAC,
       addQuest:addNewQuestionThunkCreator,
       getTestsList:getTestsListThunkCreator,

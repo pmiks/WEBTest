@@ -18,7 +18,7 @@ let onLogin=()=>{
     {me.isAuth&&
       <div className="btn">
       <NavLink to={"/edittest"}>
-      <div><div >{me.last_name} {me.first_name}</div><div><img src={me.photo}/></div></div>
+      <div><div >{/*me.last_name*/} {me.first_name}</div><div><img src={me.photo}/></div></div>
       </NavLink>
     </div>}
 
