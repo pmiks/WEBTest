@@ -1,14 +1,14 @@
 import AlertWindow from './AlertWindow';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {showAlertWindowAC} from '../../redux/reducerTests2';
+import {showAlertWindowAC} from '../../redux/reducerTestsEdit';
 
 
 const mapStateToProps=(state)=>{
   return {
-    showWindow:state.Tests.flugShowAlertWindow,
-    message:state.Tests.messageAlertWindow,
-    error:state.Tests.errorAlertWindow
+    showWindow:state.TestsEdit.flugShowAlertWindow,
+    message:state.TestsEdit.messageAlertWindow,
+    error:state.TestsEdit.errorAlertWindow
   }
 }
 

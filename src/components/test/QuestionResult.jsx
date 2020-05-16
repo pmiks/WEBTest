@@ -17,6 +17,7 @@ const QuestionResult=(props)=>{
         props.onNext();
     }
     if (props.tR.allIsChecked) props.testIsDone();
+    console.log(props.tR.allIsChecked);
   }
 
   let exit=()=>{

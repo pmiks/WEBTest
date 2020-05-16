@@ -18,8 +18,8 @@ export default compose (
       testIsDone:testIsDoneAC,
       selectTest:selectTestThunkCreator,
       onNext:nextQuestionTC,
-      unloadTest:unloadTestAC,
-      unloadFlugON:unloadFlugON
+//      unloadTest:unloadTestAC,
+//      unloadFlugON:unloadFlugON
     })
 )
 (QuestionResult)

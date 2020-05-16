@@ -74,7 +74,7 @@ logout(){ debugger; return instanceTest.get(`/auth/logout`) }
 
 export const  testAPI={
   loadTest(id){ return instanceTest.get(`test/${id}`) },
-  addTest(id,data){ return instanceTest.post(`test/${id}`,data) },
+  addTest(data){ return instanceTest.post(`test`,data) },
   editTest(id,data){ return instanceTest.patch(`test/${id}`,data) },
   deleteTest(id){ return instanceTest.delete(`test/${id}`) },
 
@@ -106,7 +106,8 @@ deleteQuestionPhoto(idQ){return instanceTest.delete(`question/img/${idQ}`);},
 deleteAnswerPhoto(idA){return instanceTest.delete(`answer/img/${idA}`);},
 
 saveTest(filename){},
-getTestsList(id){ return instanceTest.get(`testslist`) },
+getTestsList(){ return instanceTest.get(`testslist`) },
+getTestsListForEdit(){ return instanceTest.get(`testslistforedit`) },
 
 sendStat(data){ return instanceTest.post(`sendstat`,data) },
 
@@ -125,6 +126,16 @@ getAllAnswers(id){ return instanceTest.get(`getallanswers/${id}`) },
 
 sendUResultQ(data){ return instanceTest.post(`addurq`,data) },
 
-testdone(session) {return instanceTest.patch(`testdone/${session}`)} 
+deleteUserResult(session){ return instanceTest.delete(`testresult/${session}`)  },
+testdone(session) {return instanceTest.patch(`testdone/${session}`)},
+
+gettestresult(session){ return instanceTest.get(`testresult/${session}`) },
+getAllTestResult(){ return instanceTest.get(`testresult/all`) },
+
+getResult(idtest){ return instanceTest.get(`result/${idtest}`) },
+addResult(data){ return instanceTest.post(`result`,data) },
+editResult(id,data){ return instanceTest.patch(`result/${id}`,data) },
+deleteResult(id){ return instanceTest.delete(`result/${id}`)  }
+
 
 }

@@ -1,16 +1,22 @@
 import React from 'react';
 import './mainpage.css';
+
 import LoadImage from './LoadImage';
 import {NavLink} from "react-router-dom";
+import {GLOBAL_PATH_API,GLOBAL_PATH_SITE} from '../../Global'
+import Share from '../share/share';
+import noimg from '../../assets/images/noimg_yes.png'
 
 const TestsList=(props)=>{
   return <div className="TestList">{props.testslist&& props.testslist.map(
     l=>{/*if (props.editMode||l.published)*/
-      return <NavLink to={"test/"+l.id}> <div className={!l.published?"TestItem":"TestItem published"}>
-                     <img src={window.global.GLOBAL_PATH_SRC+(l.coverimg?l.coverimg:"/images/system/unnamed.jpg")} />
+      return  <div className={!l.published?"TestItem":"TestItem published"}>
+              <NavLink to={"test/"+l.id} >
+                     <img className="cover" src={(l.coverimg?GLOBAL_PATH_API+'/'+l.coverimg:noimg)} />
                      <label>{l.testname}</label>
-               </div>
                </NavLink>
+                     <div className="share"><Share url={GLOBAL_PATH_SITE+'/test/'+l.id} title={l.testname} img={GLOBAL_PATH_API+'/'+l.coverimg} size="30px"/></div>
+               </div>
     }
   )}</div>
 }

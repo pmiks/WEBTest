@@ -1,0 +1,35 @@
+.PersonalArea{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 100vh;
+  grid-gap: 1em;
+
+}
+
+.PersonalArea>.menu{
+  margin-left: 20px;
+  padding-top: 50px;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-self: flex-start;
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.PersonalArea>.menu>.mitem{
+  padding: 5px;
+  margin: 5px;
+  color: #f2972e;
+}
+
+.PersonalArea>.menu>.mitem:hover{
+  color:#d17000 ;
+}
+
+
+.PersonalArea>.context{
+  background-color: none;
+  align-self: stretch;
+}

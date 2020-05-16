@@ -1,36 +1,37 @@
 import React,{useEffect} from 'react';
-import './TestResult.css'
+import './TestResult.css';
+import Share from '../share/share';
+import {GLOBAL_PATH_SITE,GLOBAL_PATH_API} from '../../Global'
 
-const TestResult=(props)=>{
+const TestResult=({tr,match,getTestResult})=>{
   useEffect(() => {
-//      selectTest(match.params.testid);
-},[props.match.params.testsession]);
-
-
-
+      if (match.params.testsession) getTestResult(match.params.testsession);
+},[match.params.testsession]);
 
    let rightanswer=0;
    let score=0
-   let resultTest=props.tr.resquestion
+   let resultTest=tr.resquestion
      .map((q,i)=> {score=score+q.score; if (q.result) rightanswer++; else {
        return <div className="item">
               <div className="num">№{i+1} </div>
-              {q.resFill.imgQ&&<div className="qimg"><img src={window.global.GLOBAL_PATH_SRC+q.resFill.imgQ}/></div>}
+              {q.resFill.imgQ&&<div className="qimg"><img src={GLOBAL_PATH_API+'/'+q.resFill.imgQ}/></div>}
               <div className="questtext">{q.resFill.question}</div>
-              <div className="rightresult">Правильный ответ {q.resFill.imgAR&&<img src={window.global.GLOBAL_PATH_SRC+q.resFill.imgAR}/>} {q.resFill.anstextR}
-                      <div className="statres">Так же отвечают: {Math.round(q.resFill.statR*(100/q.resFill.statT))}%</div></div>
-              <div className="wrongresult">Ваш выбор {q.resFill.imgAU&&<img src={window.global.GLOBAL_PATH_SRC+q.resFill.imgAU}/>} {q.resFill.anstextU}
-                      <div className="statres">Правильно отвечают: {Math.round(q.resFill.statU*(100/q.resFill.statT))}%</div></div>
+              <div className="rightresult">Правильный ответ {q.resFill.imgAR&&<img src={GLOBAL_PATH_API+'/'+q.resFill.imgAR}/>} "{q.resFill.anstextR}"
+                      <div className="statres"> Правильно отвечают: {Math.round(q.resFill.statR*(100/q.resFill.statT))}%</div></div>
+              <div className="wrongresult">Ваш выбор {q.resFill.imgAU&&<img src={GLOBAL_PATH_API+'/'+q.resFill.imgAU}/>} "{q.resFill.anstextU}"
+                      <div className="statres"> Так же отвечают: {Math.round(q.resFill.statU*(100/q.resFill.statT))}%</div></div>
               </div>}
      });
-   return <div className="testres"> <h1>Результаты теста</h1>
-             {props.tr&&<>
-               <div className="finalresult"> Правильных ответов {rightanswer} из  {props.tr.resquestion.length} <div className="statres">({Math.round((100/props.tr.resquestion.length)*rightanswer)}% )</div>
-                Баллы ({score})
+   return <div><div className="testres"> <h1>Результаты теста: {tr.testname}</h1>
+             {tr&&<>
+               <div className="finalresult"> Правильных ответов {rightanswer} из  {tr.resquestion.length} <div className="statres">({Math.round((100/tr.resquestion.length)*rightanswer)}% )</div>
+                {/*Баллы ({score})*/}
                </div>
                {resultTest}
                </>
             }
+            </div>
+           <div style={{"padding-top":"10px","padding-bottom":"100px"}}><Share url={GLOBAL_PATH_SITE+"/testresult/"+tr.sessionID} title={"Результаты теста: "+tr.testname} img={GLOBAL_PATH_SITE+"/"+tr.testcover} size="30px"/></div>
            </div>
  }
 

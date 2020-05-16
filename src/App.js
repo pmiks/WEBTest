@@ -5,7 +5,7 @@ import React              from 'react';
 import {Route,Switch,Redirect} from 'react-router-dom';
 //import ContainerHeader    from './components/header/ContainerHeader';
 //import LeftPanel          from './components/leftpanel';
-import TestPage           from './components/test/TestPage';
+import TestPage           from './components/test/EditMode/TestEditPage';
 //import ContainerUser      from './components/users/ContainerUser';
 //import ContainerProfile   from './components/profile/ContainerProfile';
 //import Login              from './components/login/containerLogin';
@@ -21,9 +21,10 @@ import Header from './components/header/Header'
 import TestList from './components/test/mainpage_container';
 import Test           from './components/test/Test';
 import TestResult   from './components/test/TestResultContainer';
-const GLOBAL_PATH_SRC="https://api.electricalab.ru/";
+import PersonalArea from './components/test/PersonalArea';
+//const GLOBAL_PATH_SRC="https://api.electricalab.ru/";
 
-window.global = {GLOBAL_PATH_SRC};
+//window.global = {GLOBAL_PATH_SRC};
 
 class App extends React.Component {
   componentDidMount(){
@@ -48,8 +49,9 @@ render(){
        <Route path='/slider' render={()=><SliderInfo/>} />*/}
        <div className="Page" style={{"background-color": "transparent"}}>
        <Switch>
-         <Route path='/edittest' render={()=><TestPage/>}/>
+         <Route path='/personalarea' render={()=><PersonalArea/>}/>
          <Route path='/test/:testid?' render={()=><Test/>}/>
+         <Route path='/testedit/:testid?' render={()=><TestPage/>}/>
          <Route path='/testresult/:testsession?' render={()=><TestResult/>}/>
          <Route path='/' render={()=><TestList/>}/>
          <Redirect to="/public"/>

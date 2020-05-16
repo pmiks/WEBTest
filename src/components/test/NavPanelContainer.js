@@ -1,7 +1,8 @@
 import NavPanel from './NavPanel';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {testIsDoneAC,nextQuestionTC,unloadTestAC,unloadFlugON,prevQuestionAC} from '../../redux/reducerTests2';
+import {testIsDoneAC,
+        nextQuestionTC,unloadTestAC,unloadFlugON,prevQuestionAC} from '../../redux/reducerTests2';
 import {getCurrentTestParamSEL,getCurrentQuestionSEL,getTestResultSEL,getCurrentAnswerSEL} from '../../redux/test-selectors';
 
 const mapStateToProps=(state)=>{

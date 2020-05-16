@@ -10,6 +10,7 @@
       box-shadow: 0 0 50px rgba(55,55,55,1);
       background-color: white;
       justify-items:stretch;
+
     }
     .num{ grid-area: n;  width: 30px;}
     .qimg{  grid-area: qi;  width: 100px;  justify-self: left;  align-self:  center;}
@@ -45,6 +46,7 @@
       box-shadow: 0 0 50px rgba(55,55,55,1);
       background-color: white;
       justify-items:stretch;
+      margin-bottom: 50px;
     }
 
     .num{ grid-area: n;  width: 30px;}
@@ -70,5 +72,6 @@
 }
 
 .statres{
-  visibility:visible; 
+  display: inline;
+  visibility:visible;
 }

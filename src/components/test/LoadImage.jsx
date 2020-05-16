@@ -1,15 +1,16 @@
 import React,{ useState }  from 'react';
 import './testslist.css'
+import {GLOBAL_PATH_API} from '../../Global'
 
 const LoadImage=({img,id,onDel,onLoad,height,width,zoomer,alter})=>{
   const [showBig, setShowBig] = useState(false);
 
   return <div className={"pic"}>
   {img&&<img style={{ "max-width": `"${width}"`, "max-height": `"${height}"`}}
-    src={window.global.GLOBAL_PATH_SRC+img}
+    src={GLOBAL_PATH_API+'/'+img}
     onClick={()=>{setShowBig(true)}}/>}
     {alter&&!img&&<img style={{height: "auto", width: "auto", "max-width": `"${width}"`, "max-height": `"${height}"`}}
-      src={window.global.GLOBAL_PATH_SRC+"/images/system/unnamed.jpg"}
+      src={GLOBAL_PATH_API+"/images/system/unnamed.jpg"}
       onClick={()=>{setShowBig(true)}}/>}
 
   {!img&&onLoad&&<div>
@@ -27,7 +28,7 @@ const ShowBigImage=({img,show,close})=>{
   return <div className="ShowBigImageBox" >
   <div className="BlockLayer" onClick={close}></div>
   <div className="ShowBigImage">
-      <div onClick={close}><img src={window.global.GLOBAL_PATH_SRC+img}/></div>
+      <div onClick={close}><img src={GLOBAL_PATH_API+'/'+img}/></div>
   </div>
   </div>
   }

@@ -7,7 +7,7 @@ import {selectTestThunkCreator,showTicketListAC} from '../../redux/reducerTests2
 const mapStateToProps=(state)=>{
   return {
     testslist:state.Tests.testslist,
-    editMode:state.Tests.editMode,
+//    editMode:state.Tests.editMode,
     isAuth:state.me.isAuth,
     idTest:state.Tests.idTest,
   }

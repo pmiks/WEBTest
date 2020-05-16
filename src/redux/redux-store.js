@@ -9,11 +9,12 @@ import {reducerAuthVK}               from './reducerAuthVK';
 import {reducerTV}                   from './reducerTV';
 import {reducerInit}                 from './reducerInit';
 import {reducerSlider}               from './reducerSlider';
-
+import {reducerTestsEdit}                from './reducerTestsEdit';
 let reducers=combineReducers(
     {
      MenuItems:reducerMenuItem,
      Tests:reducerTests,
+     TestsEdit:reducerTestsEdit,
      userList:reducerUser,
      me:reducerAuthVK,
      form:reducerForm,

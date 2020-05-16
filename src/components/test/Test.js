@@ -8,7 +8,7 @@ import TestsResult from './TestResultContainer'
 import Paginator from '../../common/paginator';
 import QuestionResult from './QuestionResultContainer';
 //import QuestionEditTools from './QuestionEditToolsContainer';
-import TestEdit from './TestEditContainer.jsx';
+//import TestEdit from './TestEditContainer.jsx';
 import NavPanel from './NavPanelContainer';
 //import TicketsEdit from './TicketTestEditContainer';
 import TimerBlock from './TimerBlock';
@@ -16,37 +16,55 @@ import Tickets from './TicketTestContainer';
 //import TestCheck from './TestCheckContainer';
 //import AlertWindow from './AlertWindowContainer';
 import {withRouter,Redirect,NavLink} from 'react-router-dom';
-
+import {GLOBAL_PATH_API} from '../../Global'
 
 import {getCurrentTestParamSEL} from '../../redux/test-selectors';
 import {selectTestThunkCreator,
         setCurrentQuestionAC,
-        addNewQuestionThunkCreator,
+//        addNewQuestionThunkCreator,
 //        onEditModeAC,
-        offEditModeAC,
-        getTestsListThunkCreator,
-        loadQuestionThunkCreator,
+//        offEditModeAC,
+//        getTestsListThunkCreator,
+//        loadQuestionThunkCreator,
         testIsDoneAC,
         nextQuestionTC,
       } from '../../redux/reducerTests2';
 
 
-const TestPage=({match,idTest,editMode,list,currentQuestion,listlength,isDoneTest,
-                 onEditMode,offEditMode,getTestsList,onSave,onCancel,addQuest,
-                 setQuest,onNext,selectTest,tp,currentAnswer,onPrev,
-                 flugTestIsOver,testIsDone})=>{
+const TestPage=({match,
+  idTest,
+//  editMode,
+  list,
+  currentQuestion,
+  listlength,
+//  isDoneTest,
+//  onEditMode,
+//  offEditMode,
+//  getTestsList,
+//  onSave,
+//  onCancel,
+//  addQuest,
+  setQuest,
+//  onNext,
+  selectTest,
+  tp,
+//  CurrentAnswer,
+//  onPrev,
+  flugTestIsOver,
+  testIsDone
+})=>{
 
   useEffect(() => {
       selectTest(match.params.testid);
   },[match.params.testid]);
 
   let setQ=(page,pc)=>{
-     if (!tp.type_levelgame||editMode) setQuest(list[page-1].id);
+     if (!tp.type_levelgame) setQuest(list[page-1].id);
    }
   let bi="";
   let isbg=false;
  if (tp) {
-     bi=window.global.GLOBAL_PATH_SRC+tp.coverimg;
+     bi=GLOBAL_PATH_API+"/"+tp.coverimg;
      isbg=tp.isbackground
    }
  return <div className={"testpage"} style={{"background-color": "transparent"}}>
@@ -54,22 +72,22 @@ const TestPage=({match,idTest,editMode,list,currentQuestion,listlength,isDoneTes
       {isbg&&<div className={"BackLayer"} style={{"background": `url("${bi}") 100% 100%`}}></div>}
       <div>
 {/*Заголовок и таймер теста*/}
-      {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0||editMode)&&<div className="testname">
+      {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0)&&<div className="testname">
            <div className="name">{tp.testname}</div>
            <div className="time"><TimerBlock secondstime={tp.testtime} onEndCount={testIsDone}/></div>
            </div>
       }
 {/*Показат Pagenator*/}
-      {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0||editMode)&&<Paginator prevnext={editMode?true:false}
+      {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0)&&<Paginator prevnext={true}
                         totalCount={listlength} startend={true}   pageSize={1}
                         currentPage={currentQuestion+1}
                         onClick={setQ}/>}
 {/*Показат текущий вопрос*/}
-      {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0||editMode)&&<TestQuestion/>}
+      {(listlength>0)&&!flugTestIsOver&&(tp.tickets.length===0)&&<TestQuestion/>}
 {/*Показать кнопки "вперед" "назад"*/}
       {(listlength>0)&&<NavPanel/>}
 {/*Показат варианты билетов*/}
-      {!editMode&&(idTest>0)&&(tp.tickets.length>0)&&<Tickets/>}
+      {(idTest>0)&&(tp.tickets.length>0)&&<Tickets/>}
 {/*Показать результат теста*/}
       {flugTestIsOver&&<TestsResult  list={list}/>}
 {/*Показать результат ответа на вопрос*/}
@@ -86,7 +104,7 @@ let mapStateToProps=(state)=>{
         tp:getCurrentTestParamSEL(state),
         currentQuestion:state.Tests.currentQuestion,
         currentAnswer:state.Tests.currentAnswer,
-        editMode:state.Tests.editMode,
+//        editMode:state.Tests.editMode,
         idTest:state.Tests.idTest,
         list:state.Tests.list,
         listlength:state.Tests.list.length,
@@ -98,10 +116,10 @@ let mapStateToProps=(state)=>{
 export default compose(
     connect(mapStateToProps,{
 //      onEditMode:onEditModeAC,
-      offEditMode:offEditModeAC,
-      addQuest:addNewQuestionThunkCreator,
-      getTestsList:getTestsListThunkCreator,
-      onCancel:loadQuestionThunkCreator,
+//      offEditMode:offEditModeAC,
+//      addQuest:addNewQuestionThunkCreator,
+//      getTestsList:getTestsListThunkCreator,
+//      onCancel:loadQuestionThunkCreator,
       setQuest:setCurrentQuestionAC,
       onNext:nextQuestionTC,
       selectTest:selectTestThunkCreator,

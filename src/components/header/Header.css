@@ -3,12 +3,29 @@
   .line{
     white-space: nowrap;
     display: grid;
-    grid-template-columns: 5px 1fr 3fr 1fr;
+    grid-template-columns: 1fr 1fr 3fr 1fr;
     align-items: center;
     justify-items:right;
     overflow-y: hidden;
   }
 
+  .logo{
+    white-space: nowrap;
+    align-items: center;
+    justify-items:right;
+
+    display: grid;
+    grid-template-columns: 1fr 0px;
+    margin-left:  15px;
+    margin-right: 15px;
+  }
+
+  .logo>div{
+    white-space: nowrap;
+    align-items: center;
+    justify-items:right;
+    display: inline;
+  }
 
   .line input{
     border-radius: 15px;
@@ -60,6 +77,23 @@ div.NAME{
     overflow-y: hidden;
   }
 
+  .logo{
+    white-space: nowrap;
+    align-items: center;
+    justify-items:right;
+    justify-self:right;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+  }
+
+  .logo>div{
+    white-space: nowrap;
+    align-items: center;
+    justify-items:right;
+    display: inline;
+  }
+
 
   .line input{
     border-radius: 15px;
@@ -78,6 +112,7 @@ div.NAME{
   }
 
   div.NAME{
+    display: inline;
     border-radius: 15px;
     padding: 7px 10px ;
     border: 0;

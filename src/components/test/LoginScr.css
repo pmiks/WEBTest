@@ -59,3 +59,15 @@
   box-shadow: 0 0 7px #666; /* Параметры тени */
   overflow: hidden;
 }
+
+.authchoise{
+  white-space: nowrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.authchoise img{
+  height: 30px;
+  /*box-shadow: 0 0 7px #666; /* Параметры тени */
+}

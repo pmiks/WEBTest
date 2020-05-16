@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
 
-// import {
-//       } from '../../redux/reducerTests2';
+import {getTestResultTC} from '../../redux/reducerTests2';
 
 
 
@@ -18,7 +17,7 @@ let mapStateToProps=(state)=>{
 
 export default compose(
     connect(mapStateToProps,{
-
+      getTestResult:getTestResultTC
     }),
   //  withAuthRedirect
     withRouter
