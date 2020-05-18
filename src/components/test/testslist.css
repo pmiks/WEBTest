@@ -236,10 +236,10 @@
 .questionedit button {margin: 0}
 .questionedit button:hover{}
 .questionedit textarea {height: 3em; font-size: 12pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit; font-family: inherit;}
-.questionedit .inputfile { width: 0.1px;	height: 0.1px;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;}
-.questionedit .inputfile + label {font-weight: 700; color: white; background-color: black; display: inline-block; border: 1px solid white; border-radius: 3px; padding: 3px;}
-.questionedit .inputfile:focus + label,
-.questionedit .inputfile + label:hover { background-color: grey; cursor: pointer; /* "hand" cursor */}
+/*.questionedit .inputfile { width: 0.1px;	height: 0.1px;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;}*/
+/*.questionedit .inputfile + label {font-weight: 700; color: white; background-color: black; display: inline-block; border: 1px solid white; border-radius: 3px; padding: 3px;}*/
+/*.questionedit .inputfile:focus + label,*/
+/*.questionedit .inputfile + label:hover { background-color: grey; cursor: pointer;}*/
 .questioncomment { margin: 10px 0;  display: grid;  grid-template-columns: minmax(min-content,max-content) 1fr;  grid-gap: 15px;  width: 100%}
 .questioncomment label {width: 100%;font-weight: bolder;}
 .questioncomment textarea  {height: 3em; font-size: 12pt; width: 100%;  color:inherit; border-radius: 1px; background-color: inherit; font-family:inherit;;}
@@ -273,10 +273,10 @@
 .answerlistedit>.rightitem{ background-color: green; box-shadow: 0 0 20px rgba(0,255,0,1);}
 .answerlistedit>.answeredit button{}
 .answerlistedit>.answeredit button:hover{ background-color: grey;}
-.answerlistedit>.answeredit .inputfile { width: 0.1px;	height: 0.1px;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;}
+/*.answerlistedit>.answeredit .inputfile { width: 0.1px;	height: 0.1px;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;}
 .answerlistedit>.answeredit .inputfile + label {font-weight: 700; color: white; background-color: black; display: inline-block; border: 1px solid white; border-radius: 3px; padding: 3px;}
 .answerlistedit>.answeredit .inputfile:focus + label,
-.answerlistedit>.answeredit .inputfile + label:hover {  background-color: grey; cursor: pointer; /* "hand" cursor */}
+.answerlistedit>.answeredit .inputfile + label:hover {  background-color: grey; cursor: pointer; /* "hand" cursor }*/
 
 
 /*Форма редактирования теста*/
@@ -360,9 +360,9 @@
 
  .pic {width:100px;  text-align: center; margin: 5px; font-size: 8pt}
  .inputfile { width: 0.1px;	height: 0.1px;	opacity: 0;	overflow: hidden;	position: absolute;	z-index: -1;}
- .inputfile + label {font-weight: 700; color: white; background-color: black; display: inline-block; border: 1px solid white; border-radius: 3px; padding: 3px;}
+ .inputfile + label {font-weight: 700; color: black; background-color: #f2972e; display: inline-block; border: 1px solid white; border-radius: 3px; padding: 3px;}
  .inputfile:focus + label,
- .inputfile + label:hover {  background-color: grey; cursor: pointer; /* "hand" cursor */}
+ .inputfile + label:hover {  background-color:#d17000; cursor: pointer; /* "hand" cursor */}
 
 .ShowBigImageBox{  width: 70%;  display: inline-block;}
 .ShowBigImage img{ position:fixed ;top:50%;left:50%;transform: translate(-50%, -50%);max-height: 90%;max-width: 90%;z-index: 2}
@@ -371,14 +371,16 @@
  button{
    font-size: 8pt;
    font-weight: 700;
-   color: white;
-   background-color: black;
+   color: black;
+/*   color: white;
+   background-color: black;*/
+   background-color: #f2972e;
    border: 1px solid white;
    border-radius: 3px;
    padding: 5px 3px;
    margin: 5px 5px;
  }
- button:hover:not([disabled]){ background-color: grey;}
+button:hover:not([disabled]){ /*background-color: grey;*/ background-color:#d17000; }
 
  button:disabled{ border: 1px solid grey; color: grey;font-weight:100;}
 

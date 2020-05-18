@@ -1,58 +1,27 @@
-@media (orientation: portrait) {
     /*Форма результата теста*/
     .testres{
-      font-size: 12px;
       display: grid;
-      grid-auto-columns: minmax(min-content,max-content);
       grid-row-gap: 5px;
-      color: black;
-      padding: 5px;
-      box-shadow: 0 0 50px rgba(55,55,55,1);
-      background-color: white;
-      justify-items:stretch;
-
-    }
-    .num{ grid-area: n;  width: 30px;}
-    .qimg{  grid-area: qi;  width: 100px;  justify-self: left;  align-self:  center;}
-    .questtext{  background-color: white;  grid-area: q;}
-    .testres>div.item{
       grid-template-areas:
-        "n q q "
-        "qi qi ra"
-       "qi qi wa" ;
-      grid-template-columns: 25px 70px 1fr;
-      background-color: orange;
-      padding: 5px;
-      border: 1px solid black;
-      display: grid;
-      grid-gap: 5px;
-      justify-self:stretch;
-    }
-    .testres img{  height: 50px;}
-    .finalresult{  font-size: 12pt; font-weight: 700;}
-
-    .rightresult{ grid-area: ra; padding: 5px; text-align: left; background-color: green; color: white; }
-    .wrongresult{  grid-area: wa; padding: 5px; text-align: left; background-color: red; color: white; }
-}
-
-@media (orientation: landscape) {
-    /*Форма результата теста*/
-    .testres{
-      display: grid;
-      grid-auto-columns: minmax(min-content,max-content);
-      grid-row-gap: 5px;
+        "th th" "ts tsp" "trs trs" "tss tss" "tsi tsi" "er er" ;
       color: black;
       padding: 5px;
       box-shadow: 0 0 50px rgba(55,55,55,1);
       background-color: white;
-      justify-items:stretch;
+      margin: 30px;
       margin-bottom: 50px;
     }
 
-    .num{ grid-area: n;  width: 30px;}
-    .qimg{  grid-area: qi;  width: 100px;  justify-self: left;  align-self:  center;}
-    .questtext{  background-color: white;  grid-area: q;}
-    .testres>div.item{
+    .testres>.header      {grid-area:th;font-size: 30pt; font-weight: 700;justify-self:center; }
+    .testres>.stat        {grid-area:ts;font-size: 20pt; font-weight: 700; justify-self:right;}
+    .testres>.statpercent {grid-area:tsp;  font-size: 20pt; font-weight: 700;justify-self:left;}
+    .testres>.statscore   {grid-area:tss;  font-size: 20pt; font-weight: 700;justify-self:center;display: none;}
+    .testres>.statimg     {grid-area:tsi;  font-size: 20pt; font-weight: 700;}
+    .testres>.resumeString{grid-area:trs; font-size: 30pt; font-weight: 700;}
+
+    .testres>.errors{ grid-area:er; }
+    .hide{display: none;}
+    .testres>.errors>.item{
       grid-template-areas:
         "n qi q  q"
         "n qi ra wa" ;
@@ -63,15 +32,13 @@
       display: grid;
       grid-gap: 5px;
       justify-self:stretch;
+      margin-top: 3px;
     }
-    .testres img{  height: 50px;}
-    .finalresult{  font-size: 20pt; font-weight: 700;}
 
+    .num      { grid-area: n;  width: 30px;}
+    .qimg     { grid-area: qi;  width: 100px;  justify-self: left;  align-self:  center;}
+    .questtext{ grid-area: q;  background-color: white;}
     .rightresult{ grid-area: ra; padding: 5px; text-align: left; background-color: green; color: white; }
     .wrongresult{  grid-area: wa; padding: 5px; text-align: left; background-color: red; color: white; }
-}
-
-.statres{
-  display: inline;
-  visibility:visible;
-}
+    .testres>.errors img{  height: 50px;}
+    .statres{  display: inline;  visibility:visible;}

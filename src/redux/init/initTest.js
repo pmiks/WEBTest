@@ -19,6 +19,7 @@ export const initState={
   //   published:true,
   //   wrongpermissible:1
   // },
+  result:[],
   alltestresult:[],
   flugShowTicketList:false,
   currentTicket:-1,

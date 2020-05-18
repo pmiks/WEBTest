@@ -1,1 +1,25 @@
+.testresult{
+    margin: 20px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-gap:10px;
+    background-color: #c1f5ea;
+}
 
+.testresult>.testresultitem{
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px 1fr 60px 30px;
+    align-items: center;
+
+}
+
+.testresult>.testresultitem textarea{
+  height: 2em;
+  width: 100%
+}
+
+.testresult>.header{
+  font-size: 12px;
+  align-content: center;
+  align-self: center;
+}

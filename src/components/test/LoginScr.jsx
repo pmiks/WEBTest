@@ -14,7 +14,7 @@ const LoginScr =  ({me,logout}) =>  {
 
     {me.isAuth&&
       <div className="btn">
-      <NavLink to={"/personalarea"}>
+      <NavLink to={"/personalarea/mytestresult"}>
       <div><div >{/*me.last_name*/} {me.first_name}</div><div><img src={me.photo}/></div></div>
       </NavLink>
     </div>}

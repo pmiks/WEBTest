@@ -1,6 +1,6 @@
 import {initState} from './init/initTestEdit.js'
 import {testAPI} from '../api/api';
-
+import {toNumLimMinMax,idRandom,uniqueArray} from '../common/functions';
 //const USER_CHOISE_ANSWER="USER_CHOISE_ANSWER";
 // const LOAD_TEST="LOAD_TEST";
  const SAVE_TEST="SAVE_TEST";
@@ -160,8 +160,20 @@ export const showAlertWindowAC=(show=false)=>({type:SHOW_ALERT_WINDOW,show:show}
 // const GET_TEST_RESULT='GET_TEST_RESULT';
 // export const getTestResultAC=(tr)=>({type:GET_TEST_RESULT,tr:tr});
 
-const GET_RESULT='GET_RESULT';
-export const getResultAC=(data)=>({type:GET_RESULT,data:data});
+const GET_RESULT_EDIT='GET_RESULT_EDIT';
+export const getResultEditAC=(data)=>({type:GET_RESULT_EDIT,data:data});
+
+const SET_RESULT_ITEM='SET_RESULT_ITEM';
+export const setResultItemAC=(data)=>({type:SET_RESULT_ITEM,data:data});
+
+const ADD_RESULT_ITEM='ADD_RESULT_ITEM';
+export const addResultItemAC=(data=null)=>({type:ADD_RESULT_ITEM,data:data});
+
+const DELETE_RESULT_ITEM='DELETE_RESULT_ITEM';
+export const deleteResultItemAC=(id)=>({type:DELETE_RESULT_ITEM,id:id});
+
+const SET_RESULT_AS_SAVED='SET_RESULT_AS_SAVED';
+export const setResultsAsSaved=()=>({type:SET_RESULT_AS_SAVED});
 
 export const publicateTC=()=>{
   return (dispatch)=>{
@@ -170,9 +182,6 @@ export const publicateTC=()=>{
     }
 }
 
-const idRandom=()=>{
-  return (0-Math.floor(Math.random()*10000000));
-}
 
 // const shuffle=(array,truncsize=0)=>{
 //   let currentIndex = array.length, temporaryValue, randomIndex;
@@ -319,13 +328,13 @@ async (dispatch)=>{
 // }
 
 
-export const getResultTC=(idtest)=>{
+export const getResultEditTC=(idtest)=>{
 return (dispatch)=>{
     dispatch(toggleIsSynchroAC(true));
     testAPI.getResult(idtest)
     .then(response=>{
       if (response.status===200)
-        dispatch(getResultAC(response.data));
+        dispatch(getResultEditAC(response.data));
         dispatch(toggleIsSynchroAC(false));
       });
     }
@@ -451,6 +460,8 @@ return (dispatch)=>{
             .then(data=>{
               if (data.status===200)
                 dispatch(loadTestEditAC(data.data));
+                dispatch(getResultEditAC([]));
+                dispatch(getResultEditTC(id));
             })
   .finally(()=>{dispatch(toggleIsSynchroAC(false));});
   }
@@ -526,11 +537,6 @@ return (dispatch)=>{
  }
 
 
- const uniqueArray=(M)=> {
-    for (var j = 0, R = true, J = M.length - 1; j < J; j++)
-    for (var k = j + 1, K = J + 1; k < K; k++) R = (R && M [j].anstext != M [k].anstext);
-    return R;
- }
 
 
 const SET_NEW_ID_QUESTION='SET_NEW_ID_QUESTION';
@@ -541,6 +547,9 @@ const SET_AS_SAVED='SET_AS_SAVED';
 export const setAsSavedAC=(idQ)=>({type:SET_AS_SAVED,idQ:idQ})
 const SET_NEW_TICKET_ID='SET_NEW_TICKET_ID';
 export const setNewIdTiket=(idTest,idTikOld,idTikNew)=>({type:SET_NEW_TICKET_ID,idTest:idTest,idTikOld:idTikOld,idTikNew:idTikNew})
+const SET_NEW_RESULT_ID='SET_NEW_RESULT_ID';
+export const setNewIdResult=(idResultOld,idResultNew)=>({type:SET_NEW_RESULT_ID,idResultOld:idResultOld,idResultNew:idResultNew})
+
 
 export const saveAllTC=(data,testParam)=>{
 return (dispatch)=>{
@@ -620,6 +629,30 @@ console.log("itarationAnswer idQ:",idQ);
   }
 }
 
+export const saveResultTC=(resulttest)=>{
+ return (dispatch)=>{
+    let resResult=[];
+    resulttest.forEach((item, i)=>{
+        if (item.deleted) {resResult=testAPI.deleteResult(item.id)}
+          else{
+            if (item.added) {resResult=testAPI.addResult(item)
+                .then((responseT)=>{
+                  if (responseT.status===201) {//item.id=response.data.id
+                    dispatch(setNewIdResult(item.id,responseT.data.id));
+                }});
+              }
+              else{
+                if (item.edited) {resResult=testAPI.editResult(item.id,item)}
+              }
+          }
+    })
+    resResult.then(()=>{
+      dispatch(setResultsAsSaved())
+    });
+  }
+}
+
+
 // export const saveThunkCreator=(data)=>{
 // return (dispatch)=>{
 //   dispatch(toggleIsSynchroAC(true));
@@ -692,7 +725,6 @@ const replaceNumQuestionInTicket=(test,idQOld,idQNew)=>{
 //        })
 //
 // }
-
 
 export const reducerTestsEdit=(state=initState,action)=>{
   switch (action.type) {
@@ -1093,7 +1125,32 @@ case SET_IS_SAVED: return {...state, dataIsChanged:false, }
       }
 //    case SET_ALL_ANSWERS:return {...state,allAnswers:action.data,list1:addAlterAnswer(state.list,action.data)}
 //    case SET_CURRENT_TEST_ID:return {...state,idTest:action.id}
-    case GET_RESULT:return {...state,result:action.data}
+    case GET_RESULT_EDIT:return {...state,result:action.data}
+    case SET_RESULT_ITEM:
+        let sp=toNumLimMinMax(action.data.startpercent,0,100)
+        let ep=toNumLimMinMax(action.data.endpercent,0,100)
+        let newres={...action.data,
+            edited:true,
+            startpercent:sp,
+            endpercent:ep,
+            scorestart:toNumLimMinMax(action.data.scorestart,0,10000000),
+            scoreend:toNumLimMinMax(action.data.scoreend,0,10000000),
+//            win:action.data.win?false:action.data.win,
+//            lose:action.data.win?false:action.data.lose
+//            startpercent:parseInt((action.data.startpercent>100)?100:(action.data.startpercent<0?0:action.data.startpercent),10)
+          }
+    return {...state,result:state.result.map(res=>res.id==newres.id?newres:res)}
+    case ADD_RESULT_ITEM:console.log(ADD_RESULT_ITEM);
+    return {...state,result:[...state.result,action.data?action.data:{
+      id:idRandom(),idtest:state.idTestEdit,scorestart:0,scoreend:0,startpercent:0,endpercent:0,result:"",win:false,lose:false,added:true
+    }]}
+    case DELETE_RESULT_ITEM: return {...state,result:state.result.map((res)=>res.id==action.id?{...res,deleted:true}:res)}
+    case SET_NEW_RESULT_ID:
+      return {...state,
+          result:state.result.map(res=>res.id==action.idResultOld?{...res,id:action.idResultNew}:res),
+       }
+    case SET_RESULT_AS_SAVED:return {...state,result:state.result.filter(r=>!r.deleted).map(r=>{return ({...r,added:false,edited:false})})}
+
     case SET_CURRENT_EDIT_TEST_ID:return {...state,idTestEdit:action.id}
     //{...state,allAnswers:action.data,list1:addAlterAnswer(state.list,action.data)}
 //      {...state,list:!state.editMode?addAlterAnswer(state.list,action.data):state.list,allAnswers:action.data}

@@ -75,7 +75,6 @@ const TestPage=({idTest,
       <TestCheck/>
       <QuestionEditTools/>
       <TicketsEdit/>
-      <TestResultEdit/>
       {/*(idTest>-1)&&<TicketsEdit/>*/}
       </div>
       <div>
@@ -87,7 +86,7 @@ const TestPage=({idTest,
                         currentPage={currentQuestion+1}
                         onClick={setQ}/>}
       {(idTest>-1)&&(listlength>0)&&<TestQuestionEdit/>}
-
+      <TestResultEdit/>
       {/*(idTest>-1)&&(listlength>0)&&<NavPanel/>*/}
       {/*!editMode&&(idTest>0)&&(tp.tickets.length>0)&&<Tickets/>*/}
       {(idTest>-1)&&<TestEdit/>}

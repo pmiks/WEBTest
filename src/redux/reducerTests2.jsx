@@ -1,5 +1,6 @@
 import {initState} from './init/initTest.js'
 import {testAPI} from '../api/api';
+import {idRandom,shuffle,uniqueArray} from '../common/functions';
 
 const USER_CHOISE_ANSWER="USER_CHOISE_ANSWER";
 const LOAD_TEST="LOAD_TEST";
@@ -164,6 +165,10 @@ export const getAllTestResultAC=(atr)=>({type:GET_ALL_TEST_RESULT,atr:atr});
 const DELETE_TEST_RESULT='DELETE_TEST_RESULT';
 export const deleteUserResultAC=(session)=>({type:DELETE_TEST_RESULT,session:session});
 
+const GET_RESULT='GET_RESULT';
+export const getResultAC=(data)=>({type:GET_RESULT,data:data});
+
+
 // export const publicateTC=()=>{
 //   return (dispatch)=>{
 //     dispatch(checkTestAC());
@@ -171,25 +176,7 @@ export const deleteUserResultAC=(session)=>({type:DELETE_TEST_RESULT,session:ses
 //     }
 // }
 
-const idRandom=()=>{
-  return (0-Math.floor(Math.random()*10000000));
-}
 
-const shuffle=(array,truncsize=0)=>{
-  let currentIndex = array.length, temporaryValue, randomIndex;
-  // While there remain elements to shuffle...
-  debugger;
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return truncsize>0?array.filter((a,i)=>i<truncsize):array;
-}
 
 export const selectTestThunkCreator=(idTest)=>{
 return (dispatch)=>{
@@ -204,6 +191,26 @@ testAPI.getTestsList()
     .finally(()=>{dispatch(toggleIsSynchroAC(false));});
   }
 }
+
+
+export const getResultTC=(idtest)=>
+async (dispatch)=>{
+//      console.log("------------------------------------"+idtest);
+    dispatch(toggleIsSynchroAC(true));
+    let response = await testAPI.getResult(idtest);
+      if (response.status===200)   dispatch(getResultAC(response.data));
+      dispatch(toggleIsSynchroAC(false));
+}
+
+
+// export const saveTestCoverImgTC=(idT,file)=>
+// async (dispatch)=>{
+//   dispatch(toggleIsSynchroAC(true));
+//   let response = await testAPI.saveTestCoverImg(idT,file)
+//   if (response.status===200) { dispatch(setTestCoverImageAC(response.data.filename)); }
+//       dispatch(toggleIsSynchroAC(false));
+// }
+
 
 
 
@@ -542,11 +549,6 @@ return (dispatch)=>{
 //  }
 //
 
- const uniqueArray=(M)=> {
-    for (var j = 0, R = true, J = M.length - 1; j < J; j++)
-    for (var k = j + 1, K = J + 1; k < K; k++) R = (R && M [j].anstext != M [k].anstext);
-    return R;
- }
 
 
 // const SET_NEW_ID_QUESTION='SET_NEW_ID_QUESTION';
@@ -1086,7 +1088,7 @@ export const reducerTests=(state=initState,action)=>{
     console.log(resQ);
     testAPI.sendUResultQ(resQ);
     return { ...state,
-      testresult:{...state.testresult,resquestion:[...state.testresult.resquestion,resQ]}
+      testresult:{...state.testresult,id:state.idTest,resquestion:[...state.testresult.resquestion,resQ]}
     }
     // case CHECK_TEST:
     // debugger;
@@ -1108,6 +1110,7 @@ export const reducerTests=(state=initState,action)=>{
     //       warnings:errorQuestion.reduce((v,i)=>v+(i.colansw?1:0),0)
     //     }
     //   }
+    case GET_RESULT:return {...state,result:action.data}
     case DELETE_TEST_RESULT:return {...state
       ,alltestresult:state.alltestresult.filter(tr=>tr.session!=action.session)
        }

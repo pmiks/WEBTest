@@ -1,6 +1,7 @@
 export const initState={
   //list:[],
   listedit:[],
+  result:[],
   // testparam:{
   //   testname:"Новый тест",
   //   limit_quest:50,

@@ -9,18 +9,18 @@ import {compose} from 'redux';
 import {withAuthRedirect,withPreloader} from '../../common/myhocs';
 import {Route,NavLink,Switch} from 'react-router-dom';
 
-const PersonalArea:React.FC<{}>=()=>{
+const PersonalArea:React.FC<{me:any}>=({me})=>{
   return <div className="PersonalArea">
   <div className="menu">
       <NavLink className="mitem" to="/personalarea/mytestresult">Пройденные тесты</NavLink>
-      <NavLink className="mitem" to="/personalarea/mytests">Мои тесты</NavLink>
+      {(me.GMODERATOR||me.GSUPERUSER||me.GTESTGENERATOR)&&<NavLink className="mitem" to="/personalarea/mytests">Мои тесты</NavLink>}
       <NavLink className="mitem" to="/personalarea/settings">Мои настройки</NavLink>
 
   </div>
   <div className="context">
   {/*<TestEditList/>*/}
     <Switch>
-     <Route path='/personalarea/mytests' render={()=><TestEditList/>}/>
+     {(me.GMODERATOR||me.GSUPERUSER||me.GTESTGENERATOR)&&<Route path='/personalarea/mytests' render={()=><TestEditList/>}/>}
      <Route path='/personalarea/mytestresult' render={()=><AllTestResult/>}/>
      <Route path='/personalarea/settings' render={()=><ProfileSettings/>}/>
 
@@ -32,6 +32,7 @@ const PersonalArea:React.FC<{}>=()=>{
 
 let mapStateToProps=(state:any)=>{
       return{
+        me:state.me
       }
 }
 

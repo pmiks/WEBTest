@@ -1,7 +1,7 @@
 import TestResultEdit from './TestResultEdit';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {getResultTC} from '../../../redux/reducerTestsEdit';
+import {setResultItemAC,addResultItemAC,deleteResultItemAC,saveResultTC} from '../../../redux/reducerTestsEdit';
 
 
 const mapStateToProps=(state:any)=>{
@@ -13,7 +13,11 @@ const mapStateToProps=(state:any)=>{
 
 export default compose (
     connect(mapStateToProps,{
-      getResult:getResultTC
+//      getResult:getResultTC,
+      addResultItem:addResultItemAC,
+      setResultItem:setResultItemAC,
+      deleteResultItem:deleteResultItemAC,
+      saveResult:saveResultTC
     })
 )
 (TestResultEdit)
