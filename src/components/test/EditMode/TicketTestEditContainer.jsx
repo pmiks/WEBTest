@@ -3,23 +3,15 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {withAuthRedirect} from '../../../common/myhocs';
 import {editTicketAC,
-        //saveTicketsTC,
-//        nextQuestionTC,
-//        unloadTestAC,
-//        prevQuestionAC,
+        setCurrentEditQuestion_TC,
         addTicketAC,
-        addQuestionToTicketAC,
+        addQuestionToTicket_TC,
         deleteTicketAC,
         setResultAC} from '../../../redux/reducerTestsEdit';
 import {
-//   getCurrentTestSEL,
    getTicketEditListSEL,
    getCurrentEditQuestionSEL,
    getCurrentEditTestSEL,
-//   getCurrentTestParamSEL,
-//   getCurrentQuestionSEL,
-//   getTestResultSEL,
-//   getCurrentAnswerSEL
 } from '../../../redux/test-selectors';
 
 const mapStateToProps=(state)=>{
@@ -27,21 +19,16 @@ const mapStateToProps=(state)=>{
       ticketlist:getTicketEditListSEL(state),
       currentQuestion:getCurrentEditQuestionSEL(state),
       currentTest:getCurrentEditTestSEL(state),
-//    tp:getCurrentTestParamSEL(state),
-//    allIsChecked:state.Tests.allIsChecked
   }
 }
 
 export default compose (
     connect(mapStateToProps,{
       addTicket:addTicketAC,
-      addQuestionToTicket:addQuestionToTicketAC,
+      addQuestionToTicket:addQuestionToTicket_TC,
       deleteTicket:deleteTicketAC,
       editTicket:editTicketAC,
-//      saveTickets:saveTicketsTC
-//      onNext:nextQuestionTC,
-//      onPrev:prevQuestionAC,
-//      testIsDone:testIsDoneAC,
+      goToQuest:setCurrentEditQuestion_TC
     }),
     withAuthRedirect
 )

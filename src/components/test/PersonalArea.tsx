@@ -6,10 +6,12 @@ import AllTestResult from './EditMode/AllTestResultContainer'
 //import {withAuthRedirect} from '../../common/myhocs';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import {withAuthRedirect,withPreloader} from '../../common/myhocs';
+import {withAuthRedirect} from '../../common/myhocs';
 import {Route,NavLink,Switch} from 'react-router-dom';
+import { TypeMe } from '../../redux/interface'
+import { AppStateType } from '../../redux/redux-store'
 
-const PersonalArea:React.FC<{me:any}>=({me})=>{
+const PersonalArea:React.FC<{me:TypeMe}>=({me})=>{
   return <div className="PersonalArea">
   <div className="menu">
       <NavLink className="mitem" to="/personalarea/mytestresult">Пройденные тесты</NavLink>
@@ -30,7 +32,7 @@ const PersonalArea:React.FC<{me:any}>=({me})=>{
   </div>
 }
 
-let mapStateToProps=(state:any)=>{
+let mapStateToProps=(state:AppStateType)=>{
       return{
         me:state.me
       }

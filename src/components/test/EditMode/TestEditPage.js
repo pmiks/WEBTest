@@ -5,7 +5,8 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 //import TestsList from './TestsEditListContainer'
 //import TestsResult from './TestResult'
-import Paginator from '../../../common/paginator';
+import Paginator from '../../../common/paginator2';
+import Player from '../../../common/MusicPlayer';
 //import QuestionResult from './QuestionResultContainer';
 import QuestionEditTools from './QuestionEditToolsContainer';
 import TestEdit from './TestEditContainer.jsx';
@@ -15,7 +16,7 @@ import TestResultEdit from './TestResultEditContainer';
 //import TimerBlock from './TimerBlock';
 //import Tickets from './TicketTestContainer';
 import TestCheck from './TestCheckContainer';
-import AlertWindow from '../AlertWindowContainer';
+import AlertWindow from '../../alertwindow/AlertWindowContainer';
 import {withRouter,NavLink} from "react-router-dom";
 import {withAuthRedirect} from '../../../common/myhocs';
 
@@ -25,7 +26,7 @@ import {getCurrentEditTestParamSEL} from '../../../redux/test-selectors';
 import {//selectTestAC,
         selectTestEditTC,
         //selectTestThunkCreator,
-        setCurrentEditQuestionAC,
+        setCurrentEditQuestion_TC,
         addNewQuestionThunkCreator,
         editModeONAC,
 //        offEditModeAC,
@@ -87,6 +88,7 @@ const TestPage=({idTest,
                         onClick={setQ}/>}
       {(idTest>-1)&&(listlength>0)&&<TestQuestionEdit/>}
       <TestResultEdit/>
+      {/*<Player url={"https://api.electricalab.ru/sounds/khsm_lifeline_1-.mp3"}/>*/}
       {/*(idTest>-1)&&(listlength>0)&&<NavPanel/>*/}
       {/*!editMode&&(idTest>0)&&(tp.tickets.length>0)&&<Tickets/>*/}
       {(idTest>-1)&&<TestEdit/>}
@@ -122,7 +124,7 @@ export default compose(
 //      addQuest:addNewQuestionThunkCreator,
 //      getTestsList:getTestsListThunkCreator,
 //      onCancel:loadQuestionThunkCreator,
-      setQuest:setCurrentEditQuestionAC,
+      setQuest:setCurrentEditQuestion_TC,
 //      onNext:nextQuestionTC,
       selectTestEdit:selectTestEditTC
 //      testIsDone:testIsDoneAC

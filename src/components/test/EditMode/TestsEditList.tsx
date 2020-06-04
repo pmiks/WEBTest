@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import './TestList.css';
 import {Redirect,NavLink} from 'react-router-dom';
+import { ITest } from '../../../redux/interface';
 
 export interface ITestList{
   testlist:any[]
@@ -29,8 +30,8 @@ const del=(e:any,id:number)=>{
   if (edit) return <Redirect to={"/testedit/"+idTest}/>
   return <div className="testlist">
   <div className="addButton" onClick={addTest}> + Создать тест</div>
-   {testlist&&testlist.map( l=>{
-      return (isAuth?<NavLink to={"/testedit/"+l.id}><div className={!l.published?"testsitem":"testsitem published"} >
+   {testlist&&testlist.map( (l:ITest,key:number)=>{
+      return (isAuth?<NavLink to={"/testedit/"+l.id} key={key}><div className={!l.published?"testsitem":"testsitem published"} >
                      <div className="idtest">{l.id}</div>
                      <div  className="name">{l.testname}</div>
                      <div>{l.published&&"Опубликован"}</div>

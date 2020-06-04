@@ -1,8 +1,8 @@
 import NavPanel from './NavPanel';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {testIsDoneAC,
-        nextQuestionTC,unloadTestAC,unloadFlugON,prevQuestionAC} from '../../redux/reducerTests2';
+import {testIsDone_AC,
+        nextQuestion_AC,unloadTestAC,unloadFlugON,prevQuestionAC} from '../../redux/reducerTests2';
 import {getCurrentTestParamSEL,getCurrentQuestionSEL,getTestResultSEL,getCurrentAnswerSEL} from '../../redux/test-selectors';
 
 const mapStateToProps=(state)=>{
@@ -19,9 +19,9 @@ export default compose (
     connect(mapStateToProps,{
 //      testIsDone:testIsDoneAC,
 //      selectTest:selectTestThunkCreator,
-      onNext:nextQuestionTC,
+      onNext:nextQuestion_AC,
       onPrev:prevQuestionAC,
-      testIsDone:testIsDoneAC,
+      testIsDone:testIsDone_AC,
 //      unloadTest:unloadTestAC,
 //      unloadFlugON:unloadFlugON
     })

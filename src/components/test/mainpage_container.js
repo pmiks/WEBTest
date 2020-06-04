@@ -1,8 +1,10 @@
 import TestsList from './mainpage';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {selectTestThunkCreator,showTicketListAC} from '../../redux/reducerTests2';
-
+import {selectTest_TC,
+        getTestsList_TC
+//        ,showTicketList_AC
+      } from '../../redux/reducerTests2';
 
 const mapStateToProps=(state)=>{
   return {
@@ -15,9 +17,10 @@ const mapStateToProps=(state)=>{
 
 export default compose (
     connect(mapStateToProps,{
-      selectTest:selectTestThunkCreator,
+      selectTest:selectTest_TC,
+      getTestsList:getTestsList_TC
       //onEditMode:onEditModeAC,
-      showTicketList:showTicketListAC
+//      showTicketList:showTicketList_AC
     })
 )
 (TestsList)

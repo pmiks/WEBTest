@@ -6,7 +6,7 @@
 .allresultlist>.allresultlistitem{
   background-color: #bafff5;
   display: grid;
-  grid-template-columns: 130px repeat(7, minmax(min-content,max-content)) 1fr;
+  grid-template-columns: 1fr 100px 90px 70px 70px 70px 100px 60px 60px;
   grid-gap: 5px;
   padding: 5px;
 }

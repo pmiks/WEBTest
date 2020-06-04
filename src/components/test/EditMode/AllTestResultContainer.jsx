@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 //import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../../common/myhocs';
-import {getAllTestResultTC,deleteUserResultTC} from '../../../redux/reducerTests2';
+import {getAllTestResult_TC,
+  deleteUserResult_TC} from '../../../redux/reducerTests2';
 
 
 
@@ -16,8 +17,8 @@ let mapStateToProps=(state)=>{
 
 export default compose(
     connect(mapStateToProps,{
-      getAllTestResult:getAllTestResultTC,
-      deleteUserResult:deleteUserResultTC
+      getAllTestResult:getAllTestResult_TC,
+      deleteUserResult:deleteUserResult_TC
     }),
     withAuthRedirect,
 //    withRouter

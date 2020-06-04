@@ -45,14 +45,12 @@ render(){
 
 
 export const withPreloader=(Component)=>{
-class AuthRedirectComponent extends React.Component{
+class PreloaderComponent extends React.Component{
 render(){
       if (this.props.isSynchronizing) return <Preloader/>
       return <Component {...this.props} />
       }
   }
-
   let mapStateToPropsForRedirect=(state)=>{return {isSynchronizing:state.Tests.isSynchronizing}}
-
-  return connect (mapStateToPropsForRedirect)(AuthRedirectComponent);
+  return connect (mapStateToPropsForRedirect)(PreloaderComponent);
 }

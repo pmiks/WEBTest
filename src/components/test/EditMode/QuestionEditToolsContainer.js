@@ -7,27 +7,19 @@ import {compose} from 'redux';
 import {getCurrentEditTestSEL,getCurrentEditTestParamSEL} from '../../../redux/test-selectors';
 
 import {
-// //  saveThunkCreator,
-//   editModeONAC,
-//   offEditModeAC,
-   addNewQuestionThunkCreator,
-// //  loadQuestionThunkCreator,
+   addNewQuestion_TC,
    deleteQuestionThunkCreator,
-   nextEditQuestionAC,
-   prevEditQuestionAC,
-//   selectTestEditTC,
+   nextEditQuestion_TC,
+   prevEditQuestion_TC,
    addNewAnswerAC,
-//   unloadFlugON,
    saveAllTC,
-//   unloadTestAC,
    addTicketAC,
    checkTestAC,
    publicateTC,
    selectTestEditAC
-//  saveTicketsTC,
-//  saveTestParamTC
 } from '../../../redux/reducerTestsEdit';
 import {withAuthRedirect,withAuthShow,withEditMode,withPreloader} from '../../../common/myhocs';
+import { AppStateType } from '../../../redux/redux-store';
 
 class QuestionEditToolsContainer extends React.Component{
 
@@ -63,43 +55,25 @@ let mapStateToProps=(state)=>{
          ticketlist:getCurrentEditTestSEL(state),
          currentTest:getCurrentEditTestParamSEL(state),
          currentQuestion:state.TestsEdit.currentQuestionEdit,
-// //        editMode:state.TestsEdit.editMode,
          idTest:state.TestsEdit.idTestEdit,
          list:state.TestsEdit.listedit,
-// //        isDoneTest:state.Tests.testresult.isDoneTest,
-// //        timeQuestResult:state.Tests.testparam.timeQuestResult,
          dataIsChanged:state.TestsEdit.dataIsChanged
       }
 }
 
 export default compose(
     connect(mapStateToProps,{
-// //      saveTestParam:saveTestParamTC,
-// //      Save:saveThunkCreator,
        onPublicate:publicateTC,
        addTicket:addTicketAC,
-// //      editModeON:editModeONAC,
-// //      offEditMode:offEditModeAC,
-       addQuest:addNewQuestionThunkCreator,
-       onNext:nextEditQuestionAC,
-       onPrev:prevEditQuestionAC,
+       addQuest:addNewQuestion_TC,
+       onNext:nextEditQuestion_TC,
+       onPrev:prevEditQuestion_TC,
        addNewAnswer:addNewAnswerAC,
        deleteQuestion:deleteQuestionThunkCreator,
-// //      getTestsList:getTestsListThunkCreator,
-// //      Cancel:loadQuestionThunkCreator,
-// //      selectTest:selectTestEditTC,
-// //      unloadFlugON:unloadFlugON,
        saveAllQuestions:saveAllTC,
-// //      unloadTest:unloadTestAC,
        checkTest:checkTestAC,
        selectTestEdit:selectTestEditAC
-//      saveTickets:saveTicketsTC
-// //      setQuest:setCurrentQuestionAC,
-// //      onNext:nextQuestionAC,
-// //      selectTest:selectTestThunkCreator
     }),
-  //  withAuthRedirect,
   withAuthShow,
-//  withEditMode
   )
   (QuestionEditToolsContainer);

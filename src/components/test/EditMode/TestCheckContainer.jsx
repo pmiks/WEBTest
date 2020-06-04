@@ -6,7 +6,7 @@ import {
         // editTicketAC,
         // addTicketAC,
         // addQuestionToTicketAC,
-         setCurrentEditQuestionAC,
+         setCurrentEditQuestion_TC,
         // deleteTicketAC
       } from '../../../redux/reducerTestsEdit';
 import {
@@ -29,7 +29,7 @@ const mapStateToProps=(state)=>{
 
 export default compose (
     connect(mapStateToProps,{
-        goToQuest:setCurrentEditQuestionAC
+        goToQuest:setCurrentEditQuestion_TC
 //      addTicket:addTicketAC,
 //      addQuestionToTicket:addQuestionToTicketAC,
 //      deleteTicket:deleteTicketAC,

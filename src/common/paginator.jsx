@@ -8,7 +8,7 @@ import './paginator.css';
 // prevnext,  true/false показать/скрыть кнопку в предыдущий следующий
 // startend - true/false показать/скрыть кнопку в начало в конец
 
-const Paginator=({totalCount,pageSize,currentPage,onClick,prevnext,startend})=>{
+const Paginator=({totalCount,pageSize,currentPage,onClick,prevnext,startend,displaystyle})=>{
 
   let pagesCount=Math.ceil(totalCount/pageSize);
   let pages=[];
@@ -17,22 +17,22 @@ const Paginator=({totalCount,pageSize,currentPage,onClick,prevnext,startend})=>{
   let  maxPView=currentPage<=pagesCount-Math.ceil(sizeframe/2)?minPView+sizeframe-1:pagesCount;
   minPView=maxPView-(sizeframe-1);
   for(let i=1;i<=pagesCount;i++) pages.push(i);
-  return <div className="pagenator">
-    {startend && currentPage>=7 && <span onClick={()=>{onClick(1,pageSize)}}>1</span>}
-    {prevnext && currentPage!==1 && <span onClick={()=>{onClick(currentPage-1,pageSize)}}> &#8592; </span>}
+  return <div className={"pagenatorDefault pagenator_"+displaystyle}>
+    {startend && currentPage>=7 && <div onClick={()=>{onClick(1,pageSize)}}>Начало</div>}
+    {prevnext && currentPage!==1 && <div onClick={()=>{onClick(currentPage-1,pageSize)}}> &#8592; </div>}
     {minPView>1 && <>&emsp;...&emsp;</>}
     {pages.map(p=>{
     return (
       (p>=minPView && p<=maxPView &&
-      <span onClick={()=>{onClick(p,pageSize)}}
-            className={currentPage===p ?"selectedPageNumber":"PageNumber"}>{p}
+      <span onClick={onClick?()=>{onClick(p,pageSize)}:()=>{}}
+            className={currentPage===p?"selectedPageNumber":onClick?"":"notclicable"}>{p}
       </span>)
       )
     })}
      {maxPView<pagesCount &&  <>&emsp;...&emsp;</>}
-       {prevnext && currentPage!==pagesCount && <span onClick={()=>{onClick(currentPage+1,pageSize)}}> &#8594; </span>}
-     {startend&&prevnext&& currentPage<=pagesCount-5 && <span onClick={()=>{onClick(pagesCount,pageSize)}}>Конец</span>}
-     {startend&&!prevnext&& currentPage<=pagesCount-5 && <span onClick={()=>{onClick(pagesCount,pageSize)}}>{pagesCount}</span>}
+       {prevnext && currentPage!==pagesCount && <div classname={onClick?"clickable":""} onClick={()=>{onClick(currentPage+1,pageSize)}}> &#8594; </div>}
+     {startend&&prevnext&& currentPage<=pagesCount-5 && <div classname={onClick?"clickable":""} onClick={()=>{onClick(pagesCount,pageSize)}}>Конец</div>}
+     {startend&&!prevnext&& currentPage<=pagesCount-5 && <div classname={onClick?"clickable":""} onClick={()=>{onClick(pagesCount,pageSize)}}>{pagesCount}</div>}
      </div>
    }
 

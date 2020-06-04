@@ -1,0 +1,20 @@
+/*Форма редактирования теста*/
+/*.testedit{margin-top: 1em; display: grid; grid-template-columns: repeat(auto-fill,minmax(min-content,max-content));  grid-gap: 1px;  font-size: 1em;}*/
+
+/*.testedit{margin-top: 1em; display: grid; grid-template-columns: repeat(auto-fill,minmax(min-content,max-content));  grid-gap: 1px;  font-size: 1em; grid-auto-flow: row;}*/
+
+.testedit{margin-top: 1em; display: grid; grid-gap: 1px;  font-size: 1em; grid-template-columns: 1fr;}
+
+.testedit div{
+     padding: 5px;
+     background-color: #d6bb81;
+     display: grid;
+     grid-template-columns: minmax(min-content,max-content) minmax(min-content,max-content) minmax(min-content,max-content);
+     align-items:center;
+     justify-self: stretch;
+     min-height: 25px;
+     width: auto;
+}
+.testedit label{ align-self: center; margin: 0 10px; font-weight: bold;white-space: nowrap;}
+.testedit input{ justify-self: stretch;  align-self: center;  padding: 1px;  margin: 5px;}
+.testedit>.checktype{ justify-content:flex-start; grid-column: 1/3;}

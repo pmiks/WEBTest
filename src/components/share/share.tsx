@@ -47,7 +47,7 @@ type PropsType={
 const ShareItem:React.FC<PropsType>=({linkurl,icon,param,size,title=""})=>
 {
 
-  return <> <a href={linkurl} target="_blank"><img height={size} width={size} src={icon} title={title}/></a></>
+  return <> <a className={"social_icon"} href={linkurl} target="_blank"><img height={size} width={size} src={icon} title={title}/></a></>
 }
 
 export default Share;
