@@ -1,7 +1,7 @@
 import Tickets from './TicketTest';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {setTicketTest_AC} from '../../redux/reducerTests2';
+import {setTicketTest_AC} from '../../redux/reducerTests';
 import {getTicketListSEL} from '../../redux/test-selectors';
 import { AppStateType } from '../../redux/redux-store';
 import { ITicket } from '../../redux/interface';
@@ -16,13 +16,11 @@ type TypeDispatchProps={
 
 type TypeProps={}
 
-
 const mapStateToProps=(state:AppStateType):TypeStateProps=>{
   return {
       ticketlist:getTicketListSEL(state),
   }
 }
-
 
 export default compose (
     connect<TypeStateProps,TypeDispatchProps,TypeProps,AppStateType>(mapStateToProps,{

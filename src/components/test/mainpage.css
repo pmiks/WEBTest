@@ -1,7 +1,7 @@
 .TestList {
-  margin: 2em;
+  margin-top: 2em;
   display: grid;
-  grid-template-columns: repeat(auto-fit,  minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill,  minmax(350px, 1fr));
   grid-gap: 1em;
   justify-items:center;
   justify-self:stretch;
@@ -9,19 +9,46 @@
 
 
 .TestList>.TestItem{ padding: 5px; grid-gap: 0.3em;
-  justify-self:stretch;
+  justify-self:center;
   justify-items:stretch;
+  width: 100%;
+  max-width: 350px;
   display: grid;
   border: 1pt solid gray;
-  height:  minmax(300px, 1fr);
   text-align: center;
   background-color: white;
 }
 
+.TestList>.RekItem{ padding: 5px; grid-gap: 0.3em;
+  justify-self:center;
+  justify-items:stretch;
+  align-items: center;
+  align-self: stretch;
+  width: 100%;
+  max-width: 350px;
+  display: grid;
+  border: 1pt solid gray;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.TestList>.RekItem div{ padding: 5px; grid-gap: 0.3em;
+  justify-self:stretch;
+  justify-items:center;
+  align-items: center;
+  align-self: stretch;
+  display: grid;
+  text-align: center;
+  background-image: url("https://api.electricalab.ru/images/system/yes_512s.jpg");
+  background-position: center;  background-repeat: no-repeat;  background-size:  100% 100%;
+}
+
+.TestList>.RekItem div:hover{ background-color: lightgray;}
+
 .TestList>.TestItem:hover{ box-shadow: 0 0 50px rgba(0,0,0,0.5);transform: scale(1.1);}
 .TestList>.TestItem>.NavLink{ color: black;  text-decoration: none;}
 .TestList>.TestItem>.NavLink label{font-weight: bold; font-size: 1.2em; color: black; text-decoration: none;}
-.TestList>.TestItem>.NavLink div.cover{ justify-self:stretch; width: 100%;height: 300px; overflow:hiden;  background-position: center;  background-repeat: no-repeat;  background-size: auto 300px;}
+.TestList>.TestItem>.NavLink div.cover{ justify-self:stretch; width: 100%;height: 300px; overflow:hidden;  background-position: center;  background-repeat: no-repeat;  background-size: auto 300px;}
 
 .TestItem> div.share{
     border-top: 1px dotted black;
@@ -30,16 +57,28 @@
     text-align: center;
 }
 
-
-
-
-/* .TestItem img.cover{
-  width: 100%;
-  justify-items:center;
-
+.TestList>.unpublished{
+  background-color: gray;
 }
 
-.TestItem img.coverimg{
-  width: 100%;
-  justify-items:center;
-} */
+ .TestItem img{
+  background-color: inherit;
+}
+
+.rekFieldMain{
+      display:block;
+      position:fixed;
+      bottom: 1vh;
+      left: 1vw;
+      right: 1vw;
+      padding: 0;
+      justify-items:center;
+      justify-self:stretch;
+      height: 90px;
+      background-color: transparent;
+      text-align: center;
+}
+
+.rekFieldMain:hover{
+  background-color: rgba(0,0,0,0.1);
+}

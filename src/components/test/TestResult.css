@@ -38,7 +38,7 @@
 
     .testres>.errors>.item>.num      { grid-area: n;  width: 2em; }
     .testres>.errors>.item>.qimg     { grid-area: qi;  width: 8em;  justify-self: left;  align-self:  center;}
-    .testres>.errors>.item>.questtext{ grid-area: q;  background-color: white;background-color: inherit;}
+    .testres>.errors>.item>.questtext{ grid-area: q;  background-color: inherit;}
     .testres>.errors>.item>.rightresult{ grid-area: ra; padding: 1vmin; text-align: left; background-color: green; color: white; }
     .testres>.errors>.item>.wrongresult{  grid-area: wa; padding: 1vmin; text-align: left; background-color: red; color: white; }
     .testres>.errors img{ width: 7em;}

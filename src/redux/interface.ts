@@ -88,6 +88,7 @@ export interface IQuestion{
   hardlevel:number
   transcompilation:string
   addtomillion:boolean
+  displaystyle?:string|null
 }
 
 export interface ITest{
@@ -123,6 +124,7 @@ export interface ITest{
   displaystyle?:string|null
   edited?:boolean|null
   added?:boolean|null
+  discription:string
 }
 
 export interface ITicket{
@@ -146,6 +148,9 @@ export interface IUserResult{
   testcover:string
   testname:string
   anscol:number
+  discription:string
+  hashtag:string
+  displaystyle:string
 }
 
 export interface IResUserResult{
@@ -218,4 +223,20 @@ export type TypeMe={
   GMODERATOR:boolean
   GSUPERUSER:boolean
   GTESTGENERATOR:boolean
-};
+}
+
+export type IAphorism={
+  id:number
+  text:string
+  obscene:boolean
+  type:number
+  photo_path:string
+  theme:string
+  published:boolean
+  creator_user:string
+  created:string
+  author:string
+  hashtags:string
+}
+
+;

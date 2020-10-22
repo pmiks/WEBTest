@@ -4,13 +4,29 @@ import {GLOBAL_PATH_API} from '../Global'
    numTest: number;
    audio: HTMLAudioElement;
    url: string;
-
+   volume:number;
+   muted:boolean;
    constructor(url:string='',numTest:number=0){
      this.url=GLOBAL_PATH_API+url//GLOBAL_PATH_API+'/sounds/hello-new-punter-2008-long.mp3';
      this.numTest=numTest;
      this.audio = new Audio(url);
-     this.audio.volume=0.05;
-//     this.audio.muted=true;
+     this.volume=0.1;
+     this.muted=localStorage.getItem('ismute')==="true";
+     this.audio.volume=0.1;
+     this.audio.muted=this.muted;
+   }
+   setvolume=(vol:number)=>{
+     this.audio.pause()
+     this.volume=vol;
+     this.audio.volume=vol;
+     this.audio.play()
+   }
+   mute=()=>{
+     //this.audio.muted=this.audio.muted?false:true;
+     this.audio.pause()
+     this.audio.muted=this.audio.muted?false:true;
+     localStorage.setItem('ismute', String(this.audio.muted))
+     this.audio.play()
    }
    clear(){
      this.audio.pause()
@@ -22,13 +38,13 @@ import {GLOBAL_PATH_API} from '../Global'
      this.numTest=numTest;
    }
    startGame(){
-     if (this.numTest==17) {
+     if (this.numTest===17) {
         this.audio.src=GLOBAL_PATH_API+'/sounds/million/startgame.mp3';
         this.audio.play();
       }
    }
    startQuestion(numQ:number=0){
-      if (this.numTest==17)
+      if (this.numTest===17)
       switch (numQ) {
       case 0:case 1:case 2:case 3:case 4:
         this.audio.src=GLOBAL_PATH_API+'/sounds/million/q1_extra-large.mp3';
@@ -48,9 +64,8 @@ import {GLOBAL_PATH_API} from '../Global'
        }
        this.audio.play();
    }
-
    helpEvent(sound:string="5050"){
-      if (this.numTest==17)
+      if (this.numTest===17)
       switch (sound) {
       case "5050":
         this.audio.src=GLOBAL_PATH_API+'/sounds/million/help5050.mp3';
@@ -67,16 +82,14 @@ import {GLOBAL_PATH_API} from '../Global'
        }
        this.audio.play();
    }
-
-
    checkChoise(){
 
    }
    pause(){
       this.audio.pause();
    }
-   rightchoice(numQ:number=0){
-     if (this.numTest==17){
+   rightChoice(numQ:number=0){
+     if (this.numTest===17){
        switch (numQ) {
        case 0:case 1:case 2:case 3:case 4:
            this.audio.src=GLOBAL_PATH_API+'/sounds/million/q1_right.mp3';
@@ -94,8 +107,8 @@ import {GLOBAL_PATH_API} from '../Global'
          this.audio.play();
        }
    }
-   wrongchoice(numQ:number=0){
-     if (this.numTest==17){
+   wrongChoice(numQ:number=0){
+     if (this.numTest===17){
        switch (numQ) {
        case 0:case 1:case 2:case 3:case 4:
            this.audio.src=GLOBAL_PATH_API+'/sounds/million/q1_wrong.mp3';
@@ -110,14 +123,6 @@ import {GLOBAL_PATH_API} from '../Global'
          this.audio.play();
        }
    }
-//   setFile(url){
-//     this.audio.stop();
-//     this.url=url//GLOBAL_PATH_API+'/sounds/hello-new-punter-2008-long.mp3';
-//     this.audio.src=url;
-//   }
-//   stop(){
-//     this.audio.stop();
-//   }
  }
 
-export let PlayerMp3 = new EventPlayer()
+export const PlayerMp3 = new EventPlayer()

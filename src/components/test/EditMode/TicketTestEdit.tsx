@@ -13,7 +13,6 @@ type TTicketsEdit={
 }
 
 const TicketsEdit:FC<TTicketsEdit>=({currentQuestion,ticketlist,addQuestionToTicket,deleteTicket,editTicket,goToQuest})=>{
-  debugger;
   return <div><div className="TicketsEdit">
       {currentQuestion&&ticketlist&&ticketlist.map(tl=>{
         let checkedT=tl.questions.some(t=>t==currentQuestion.id);

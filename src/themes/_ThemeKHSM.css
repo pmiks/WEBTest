@@ -1,5 +1,5 @@
 /* Тема кто хочет стать миллионером-------------------------------------*/
-.testpage_0002{ padding-top: 0;
+.testpage_0002{ padding-top: 0px;
 max-width: 146vh;
   /* max-width: 153vh; */
   /* width: 100vw; */
@@ -25,6 +25,19 @@ max-width: 146vh;
      }}
      .testHeader_0002{  display: none;}
 
+     .testpage_0002>.rekField{
+           display:block;
+           position: absolute;
+           min-height: 90px;
+           height: 90px;
+           top:0px;
+           left: 0;
+           right: 0;
+           z-index: 100;
+           text-align: center;
+           margin-top: 0vh;
+           bottom:;
+     }
 
 .testpage_0002 .testHeaderDefault{  display: none;   }
 
@@ -56,13 +69,12 @@ max-width: 146vh;
   z-index: 2;
 }
 @media (orientation: landscape) { .testpage_0002 .questionDefault>.questionitemtext { margin-top:  55vh;} }
-@media (orientation: portrait) {  .testpage_0002 .questionDefault>.questionitemtext {   margin-top:  50vh;}  }
+@media (orientation: portrait) {  .testpage_0002 .questionDefault>.questionitemtext {   margin-top:  52vh;}  }
 .testpage_0002 .questionDefault>.questionitempic{grid-area:questionpic; display: block; max-height: 0vh;max-width: 0vw;}
 
 .testpage_0002>.add_div1{
   color: white;
   display: block;
-  top:8%;
   left:13%;
   max-height: 40vmin;
   width: 40vmin;
@@ -75,8 +87,8 @@ max-width: 146vh;
   transition:         transform .8s ease-in-out;
 
 }
-@media (orientation: landscape) { .testpage_0002>.add_div1 {height: 40vh;width: 40vw; top:9vh; left: 8%} }
-@media (orientation: portrait) {  .testpage_0002>.add_div1 {height: 30vh;width: 40vw; top:7vh;} }
+@media (orientation: landscape) { .testpage_0002>.add_div1 {height: 40vh;width: 40vw; top:11vh; left: 8%} }
+@media (orientation: portrait) {  .testpage_0002>.add_div1 {height: 30vh;width: 40vw; top:9vh; top:calc( 8% + 40px );} }
 .testpage_0002>.add_div1:hover{  -webkit-transform: rotateZ(360deg);   transform: rotateZ(360deg);  }
 
 .testpage_0002>.SelectLevelLayer {
@@ -197,7 +209,7 @@ max-width: 146vh;
 .testpage_0002 .questionDefault>.answerinputitem>.answerbutton{grid-area:answerbutton; align-self: center; justify-self:center; }
 .testpage_0002> .pagenatorDefault{
   position: absolute;
-  top:0%;
+  top:60px;
   left:65%;
   display: grid;
   background-color: transparent;
@@ -211,12 +223,20 @@ max-width: 146vh;
   max-width: 35%;
   min-height: 35%;
   font-size: 1vmin;
+  width: 28%;
+  justify-self:stretch;
+  justify-items:stretch;
+}
+
+@media (orientation: portrait) {
+  .testpage_0002> .pagenatorDefault{top:80px;font-size: 0.9vmin;margin-bottom: 10px;}
 
 }
+
 .testpage_0002> .pagenatorDefault >.pageItem{
     align-self: center;
     display: grid;
-    font-size: 2.2em;
+    font-size: 1.9em;
     font-weight: bold;
     color: #B8860B;
     background-color: transparent;
@@ -224,16 +244,17 @@ max-width: 146vh;
     cursor:pointer;
     grid-template-columns: 1fr 3fr;
     grid-template-areas: "num value";
-    grid-gap: 1em;
     padding-top: 0vh;
-  ;
+    justify-self:stretch;
+    justify-items:stretch;
+    width: 100%;
   }
 .testpage_0002> .pagenatorDefault >.pageItem:hover{color: #B8860B; background-color: transparent;   border-color:  grey;  }
 .testpage_0002> .pagenatorDefault >.pageItem>.num{display: block;grid-area: num;justify-self: right;padding-left: 2vw; }
 .testpage_0002> .pagenatorDefault >.pageItem>.value{display: block;grid-area: value;justify-self: right;padding-right: 2vw}
 .testpage_0002> .pagenatorDefault >.done{  background-color: transparent; border-color:  white; cursor: default;
   background-image: url('https://api.electricalab.ru/images/system/million_q_done.png');
-  background-position: center;  background-repeat: no-repeat;  background-size: 90% 70%;
+  background-position: center;  background-repeat: no-repeat;  background-size: 60% 70%;
 }
 .testpage_0002> .pagenatorDefault >.highlighting{color: white;}
 .testpage_0002> .pagenatorDefault >.highlighting:hover{color: white;}
@@ -331,6 +352,12 @@ max-width: 146vh;
    max-height: 50vw;
    overflow-y: scroll;
  }
+
+ .testpage_0002>.QuestionResultDefault>.rightanswertext{display: none;grid-area:rightanswertext;}
+ .testpage_0002>.QuestionResultDefault>.wronganswertext{display: none;grid-area: wronganswertext;}
+ .testpage_0002>.QuestionResultDefault>.rightanswerpic{display: none;grid-area: rightanswerpic;}
+ .testpage_0002>.QuestionResultDefault>.wronganswerpic{display: none;grid-area: wronganswerpic;}
+
  .testpage_0002>.QuestionResultDefault>.add_div1{
  grid-area: adddiv;
  margin-top: 5%;
@@ -438,7 +465,7 @@ max-width: 146vh;
 .testpage_0002>.testres>.testbtn:hover{color: black;background-color: transparent;
   background-image: url('https://api.electricalab.ru/images/system/million/banswerright.png');
   background-position: center;  background-repeat: no-repeat;  background-size: 175% 100%;
-  transform: scale(1.1);
+  transform: scale(1.12);
 }
 .testpage_0002>.testres>.btnrepeat{grid-area: btnrepeat;justify-self: left;}
 .testpage_0002>.testres>.btnrepeat:hover{}
@@ -467,3 +494,10 @@ max-width: 146vh;
    justify-self:stretch;
    margin-top: 3px;
  }
+
+.testpage_0002>.VolumeSettings{display:grid;position: absolute;z-index: 100; top: 2vh;left: 1vw;grid-template-columns: 1fr 1fr;grid-gap: 1em;align-self: center;align-items: center;}
+.testpage_0002>.VolumeSettings>.unmuted{padding: 5px; background-color: blue;}
+.testpage_0002>.VolumeSettings>.unmuted:hover{background-color: gray;}
+.testpage_0002>.VolumeSettings>.muted{padding: 5px;background-color: red;}
+.testpage_0002>.VolumeSettings>.muted:hover{background-color: gray;}
+.testpage_0002>.VolumeSettings>.volume{width: 2em}

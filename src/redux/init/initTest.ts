@@ -23,7 +23,10 @@ export const initState:ITestState={
      resquestion:[],
      allIsChecked:false,
      isDoneTest:false,
-     anscol:1
+     anscol:1,
+     discription:"",
+     hashtag:"",
+     displaystyle:""
    },
    alltestresult:[]
 

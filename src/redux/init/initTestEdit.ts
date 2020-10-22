@@ -53,4 +53,5 @@ export const initNewTest:ITest={
   ,usercreator:0
   ,wrongpermissible:0
   ,tickets:null
+  ,discription:""
 };

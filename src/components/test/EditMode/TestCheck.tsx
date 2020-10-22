@@ -8,7 +8,7 @@ type TTestCheck={
 }
 
 const TestCheck:FC<TTestCheck>=({check,goToQuest})=>{
-if (check) {  return <div className={check.errors==0?"TestCheck green":"TestCheck red"}>
+if (check) {  return <div className={check.errors===0?"TestCheck green":"TestCheck red"}>
     <div>Ошибок:{check.errors} Предупреждений {check.warnings}</div>
     {check.List.map((c:ICheckList)=>{
               return <div>

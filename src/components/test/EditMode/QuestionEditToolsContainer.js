@@ -1,11 +1,8 @@
 import QuestionEditTools from "./QuestionEditTools";
 import React from 'react';
-
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-
 import {getCurrentEditTestSEL,getCurrentEditTestParamSEL} from '../../../redux/test-selectors';
-
 import {
    addNewQuestion_TC,
    deleteQuestionThunkCreator,
@@ -18,11 +15,10 @@ import {
    publicateTC,
    selectTestEditAC
 } from '../../../redux/reducerTestsEdit';
-import {withAuthRedirect,withAuthShow,withEditMode,withPreloader} from '../../../common/myhocs';
-import { AppStateType } from '../../../redux/redux-store';
+
+import {withAuthShow} from '../../../common/myhocs';
 
 class QuestionEditToolsContainer extends React.Component{
-
 
 SaveAll=()=>{
     this.props.saveAllQuestions(this.props.list,this.props.currentTest);
@@ -37,18 +33,18 @@ onCancel=()=>{
 // //    this.props.saveAllQuestions(this.props.list,this.props.currentTest);
 // }
 
-    render(){
-          return <div>
-                    <QuestionEditTools
-                             onSave={this.SaveAll}
-                             onCancel={this.Cancel}
-                             // onPublicate={this.onPublicate}
-                             {...this.props}
-                             />
-              </div>
-        }
-}
+render(){
+   return <div>
+            <QuestionEditTools
+                 onSave={this.SaveAll}
+                 onCancel={this.Cancel}
+                 // onPublicate={this.onPublicate}
+                 {...this.props}
+            />
+          </div>
+   }
 
+}
 
 let mapStateToProps=(state)=>{
       return{

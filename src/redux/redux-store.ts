@@ -1,17 +1,18 @@
 import {combineReducers
        ,createStore,applyMiddleware} from "redux";
 import thunkMiddleware               from 'redux-thunk';
-import {reducerTests}                from './reducerTests2';
+import {reducerTests}                from './reducerTests';
 import {reducerAuthVK}               from './reducerAuthVK';
 import {reducerInit}                 from './reducerInit';
-import {reducerTestsEdit}                from './reducerTestsEdit';
-
+import {reducerTestsEdit}            from './reducerTestsEdit';
+import {reducerAphorism}             from './reducerAphorism';
 
 
 let rootReducer=combineReducers(
     {
      Tests:reducerTests,
      TestsEdit:reducerTestsEdit,
+     Aphorism:reducerAphorism,
      me:reducerAuthVK,
      init:reducerInit,
     }

@@ -1,10 +1,10 @@
 import TestResult from './TestResultEdit';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {setResultItemAC,addResultItemAC,deleteResultItemAC,saveResultTC} from '../../../redux/reducerTestsEdit';
+import {setResultItemAC,addResultItemAC,deleteResultItemAC} from '../../../redux/reducerTestsEdit';
 import { AppStateType } from '../../../redux/redux-store';
-import { IResult, ITest } from '../../../redux/interface';
-import { getCurrentEditTestParamSEL, getCurrentEditTestTypeIdParamSEL } from '../../../redux/test-selectors';
+import { IResult} from '../../../redux/interface';
+import { getCurrentEditTestTypeIdParamSEL } from '../../../redux/test-selectors';
 
 
 
@@ -17,7 +17,6 @@ export type TypeDispatchProps={
    setResultItem:(data:IResult)=>void
    addResultItem:()=>void
    deleteResultItem:(id:number)=>void
-//   saveResult:(data:IResult[])=>void
  }
 
 
@@ -39,7 +38,6 @@ export default compose (
       addResultItem:addResultItemAC,
       setResultItem:setResultItemAC,
       deleteResultItem:deleteResultItemAC,
-    //saveResult:saveResultTC
     }
   )
 )

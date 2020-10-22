@@ -1,70 +1,12 @@
-import axios, { AxiosResponse } from 'axios';
-import { IResUserResult, IResult, ITicket, ITest, IQuestion, IAnswer, IUserResult } from '../redux/interface';
-
-// const instanceTV=axios.create({
-// //  withCredentials:true,
-//   baseURL:"https://192.168.1.141:1925/1/"
-//   });
-
+import axios from 'axios';
+import {IResUserResult, IResult, ITicket, ITest, IQuestion, IAnswer, IUserResult, IAphorism} from '../redux/interface';
 
   const instanceTest=axios.create({
     withCredentials:true,
-    baseURL:"https://api.electricalab.ru/1.1/"
-    });
-
-
-// const instance=axios.create({
-//   withCredentials:true,
 //   headers:{"API-KEY":"8a359bed-90d2-4666-9ca3-e11c03a6d21a"},
-//   baseURL:"https://social-network.samuraijs.com/api/1.0/"
-// });
+    baseURL:"https://api.yes-t.net/1.2/"
+  });
 
-// export const userAPI={
-// getUsers(currentPage=1,pageSize=20)
-//   {
-//     return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-//     .then(response=>{return response.data});
-//   },
-//
-// unfollow(id){ return instance.delete(`follow/${id}`)},
-//
-// follow(id){  return instance.post(`follow/${id}`)}
-// }
-
-// export const authAPI={
-// getAuthInfo(){ return instance.get(`/auth/me`)},
-//
-// login(auth:any){ return instance.post(`/auth/login`,auth)},
-//
-// logout(auth:any){ return instance.delete(`/auth/login`) }
-//
-// }
-
-
-
-
-// export const profileAPI={
-//   getProfile(userId:any) {return instance.get(`profile/${userId}`) },
-//
-//   getStatus(userId:any) { return instance.get(`profile/status/${userId}`) },
-//
-//   updateStatus(status:any) {return instance.put(`profile/status`,{status:status}) }
-// }
-
-// export const tvAPI={
-//   getChannels() { return instanceTV.get(`channels`) },
-//
-//   setChannel(ch:string)
-//   {
-//     let chid='4_'+ch;
-//     alert(chid);
-//     return instanceTV.post(`channels/current`,`"{"id":"${chid}"}"`)
-//   },
-//
-//   setMute(t:string) { return instanceTV.post(`audio/volume`,`{"muted":"${t}"}`) },
-//
-//   setVolume(t:string) { return instanceTV.post(`audio/volume`,`{"current":"${t}"}`) }
-// }
 
 export const authTAPI={
 getAuthInfo(){ return instanceTest.get(`/auth/me`)},
@@ -72,12 +14,10 @@ login(auth:any){ return instanceTest.post(`/auth/login`,auth)},
 logout(){ debugger; return instanceTest.get(`/auth/logout`) }
 }
 
-
 export const  testAPI={
   loadTest(id:number){ return instanceTest.get<IQuestion[]>(`test/${id}`) },
   loadTestHL(id:number,total:number=0,rand:boolean=false,hl:string="",khsm:boolean=false){
-    console.log(`testhl&id=${id}`+(total>0?`&total=${total}`:"")+(rand?"&rand=true":"")+(khsm?'&khsm=true':'')+(hl.length>0&&`&hl=${hl}`));
-    return instanceTest.get<IQuestion[]>(`testhl&id=${id}`+(total>0?`&total=${total}`:"")+(rand?"&rand=true":"")+(khsm?'&khsm=true':'')+(hl.length>0&&`&hl=${hl}`)
+     return instanceTest.get<IQuestion[]>(`testhl&id=${id}`+((total>0)?`&total=${total}`:"")+(rand?"&rand=true":"")+(khsm?'&khsm=true':'')+((hl.length>0)?`&hl=${hl}`:"")
   )
 },
 
@@ -94,8 +34,6 @@ export const  testAPI={
   deleteAnswer(idA:number){ return instanceTest.delete(`answer/${idA}`)  },
   editAnswer(idA:number,data:IAnswer){ return instanceTest.patch(`answer/${idA}`,data) },
 
-
-
   saveQuestionPhoto(idQ:number,file:any){
     debugger;
     let formData=new FormData();
@@ -109,39 +47,41 @@ export const  testAPI={
     return instanceTest.post(`answer/img/${idA}`,formData,{ headers:{'Content-Type':'multipart/form-data'} } );
   },
 
-deleteQuestionPhoto(idQ:number){return instanceTest.delete(`question/img/${idQ}`);},
-deleteAnswerPhoto(idA:number){return instanceTest.delete(`answer/img/${idA}`);},
+  deleteQuestionPhoto(idQ:number){return instanceTest.delete(`question/img/${idQ}`);},
+  deleteAnswerPhoto(idA:number){return instanceTest.delete(`answer/img/${idA}`);},
 
-//saveTest(filename){},
-getTestsList(){ return instanceTest.get<ITest[]>(`testslist`) },
-getTestsListForEdit(){ return instanceTest.get(`testslistforedit`) },
+  getTestsList(find:string|null=null,sort:string|null=null){ return instanceTest.get<ITest[]>(`testslist`+(find?`&filter=`+encodeURI(`'${find}'`):``)+(sort?`&sort=`+encodeURI(`'${sort}'`):``)) },
+  getTestsListForEdit(){ return instanceTest.get(`testslistforedit`) },
 
-sendStat(data:any){ return instanceTest.post(`sendstat`,data) },
+  sendStat(data:any){ return instanceTest.post(`sendstat`,data) },
 
-addTicket(data:ITicket){ return instanceTest.post(`ticket`,data) },
-editTicket(idTicket:number,data:ITicket){ return instanceTest.patch(`ticket/${idTicket}`,data) },
-deleteTicket(idTicket:number){ return instanceTest.delete(`ticket/${idTicket}`) },
+  addTicket(data:ITicket){ return instanceTest.post(`ticket`,data) },
+  editTicket(idTicket:number,data:ITicket){ return instanceTest.patch(`ticket/${idTicket}`,data) },
+  deleteTicket(idTicket:number){ return instanceTest.delete(`ticket/${idTicket}`) },
 
-deleteTestCoverImg(idQ:number){return instanceTest.delete(`test/img/${idQ}`);},
-saveTestCoverImg(idT:number,file:any){
-  let formData=new FormData();
-  formData.append('image',file);
-  return instanceTest.post(`test/img/${idT}`,formData,{ headers:{'Content-Type':'multipart/form-data'}} );
-},
+  deleteTestCoverImg(idQ:number){return instanceTest.delete(`test/img/${idQ}`);},
+  saveTestCoverImg(idT:number,file:any){
+    let formData=new FormData();
+    formData.append('image',file);
+    return instanceTest.post(`test/img/${idT}`,formData,{ headers:{'Content-Type':'multipart/form-data'}} );
+  },
 
-getAllAnswers(id:number){ return instanceTest.get<IAnswer[]>(`getallanswers/${id}`) },
+  getAllAnswers(id:number){ return instanceTest.get<IAnswer[]>(`getallanswers/${id}`) },
 
-sendUResultQ(data:IResUserResult){ return instanceTest.post(`addurq`,data) },
-deleteUserResult(session:string){ return instanceTest.delete(`testresult/${session}`)  },
-testdone(session:string) {return instanceTest.patch(`testdone/${session}`)},
+  sendUResultQ(data:IResUserResult){ return instanceTest.post(`addurq`,data) },
+  deleteUserResult(session:string){ return instanceTest.delete(`testresult/${session}`)  },
+  testdone(session:string) {return instanceTest.patch(`testdone/${session}`)},
 
-gettestresult(session:string){ return instanceTest.get<IUserResult>(`testresult/${session}`) },
-getAllTestResult(){ return instanceTest.get(`testresult/all`) },
+  gettestresult(session:string){ return instanceTest.get<IUserResult>(`testresult/${session}`) },
+  getAllTestResult(){ return instanceTest.get(`testresult/all`) },
 
-getResult(idtest:number){ return instanceTest.get<IResult[]>(`result/${idtest}`) },
-addResult(data:IResult){ return instanceTest.post(`result`,data) },
-editResult(id:number,data:IResult){ return instanceTest.patch(`result/${id}`,data) },
-deleteResult(id:number){ return instanceTest.delete(`result/${id}`)  }
+  getResult(idtest:number){ return instanceTest.get<IResult[]>(`result/${idtest}`) },
+  addResult(data:IResult){ return instanceTest.post(`result`,data) },
+  editResult(id:number,data:IResult){ return instanceTest.patch(`result/${id}`,data) },
+  deleteResult(id:number){ return instanceTest.delete(`result/${id}`)  },
+
+  getAphorism(id:number|null=null,rand:boolean|null=null,col:number|null=null,type:number|null=null){
+    return instanceTest.get<IAphorism[]>(`aphorism`+(id?`&id=`+encodeURI(`'${id}'`):``)+(rand?`&rand`:``)+(col?`&col=`+encodeURI(`'${col}'`):``)+(type?`&type=`+encodeURI(`'${type}'`):``) ) },
 }
 
-//testAPI.loadTest().then((res:AxiosResponse))
+

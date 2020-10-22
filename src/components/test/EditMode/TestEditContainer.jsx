@@ -11,9 +11,6 @@ import {withAuthRedirect} from '../../../common/myhocs';
 const mapStateToProps=(state)=>{
   return {
     tp:getCurrentEditTestParamSEL(state),
-//    editMode:state.Tests.idTest,
-//    editMode:state.Tests.editMode,
-//    isAuth:state.me.isAuth
   }
 }
 
@@ -22,10 +19,8 @@ export default compose (
       setTP:setTestParamAC,
       saveTestCoverImg:saveTestCoverImgTC,
       deleteTestCoverImg:deleteTestCoverImgTC
-//      selectTest:selectTestThunkCreator,
-//      onEditMode:onEditModeAC
+
     })
-//    ,withEditMode
     ,withAuthRedirect
 )
 (TestsEdit)

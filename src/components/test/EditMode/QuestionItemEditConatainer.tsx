@@ -7,7 +7,6 @@ import {getCurrentEditQuestionSEL,getCurrentEditTestParamSEL} from '../../../red
 import {
         addNewQuestion_TC,
         deleteQuestionThunkCreator,
-//        editQuestionThunkCreator,
         editQuestionTC,
         checkForKHSM_AC,
         editAnswerTC,
@@ -20,7 +19,7 @@ import {
         deleteAnswerPhotoThunkCreator,
         deleteQuestionPhotoThunkCreator,
 } from '../../../redux/reducerTestsEdit';
-import {withAuthRedirect,withPreloader} from '../../../common/myhocs';
+import {withPreloader} from '../../../common/myhocs';
 import { AppStateType } from '../../../redux/redux-store';
 
 

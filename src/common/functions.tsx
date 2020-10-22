@@ -1,4 +1,11 @@
 //import {IAnswer,IQuestion} from '../redux/interface';
+
+export const stripHTML=(html:string)=>{
+  let tmp = document.createElement("div");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText;
+}
+
 // Определяет вхождение числа в интервал между двумя числами
 export const numBetween=(val:number,num1:number,num2:number):boolean=>{
     let min=num1<num2?num1:num2

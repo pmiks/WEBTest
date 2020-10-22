@@ -1,11 +1,7 @@
-import React from 'react'
 import Header from './Header'
 import {connect} from 'react-redux'
 import { AppStateType } from '../../redux/redux-store';
-//import {logoutThunkCreator} from '../../redux/reducerAuth';
-
-
-
+import { getTestsList_TC } from '../../redux/reducerTests';
 
   const mapStateToProps=(state:AppStateType)=>{
     return{
@@ -13,10 +9,8 @@ import { AppStateType } from '../../redux/redux-store';
     }
   };
 
-
-
 export default connect( mapStateToProps,
      {
-       //logoutThunkCreator
+       getTestsList:getTestsList_TC
      }
    )(Header)

@@ -6,11 +6,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/react-helmet": "^6.0.0",
     "@types/react-redux": "^7.1.8",
     "@types/react-router-dom": "^5.1.5",
     "axios": "^0.19.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-helmet": "^6.1.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
@@ -19,7 +21,7 @@
     "redux-thunk": "^2.3.0",
     "typescript": "^3.8.3"
   },
-  "homepage": "https://proftest.electricalab.ru/",
+  "homepage": "https://yes-t.net/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -1,12 +1,37 @@
 
   /* Заголовок теста--------------------------------------*/
-  .testname{  display: grid; grid-template-columns:  1fr auto; margin-top: 20px;
-    margin-bottom: 50px; margin-left: 0; margin-right: 0; background: gray;
+  .testname{  display: grid; grid-template-columns:  1fr auto; margin: 20px 0 50px 0; background: gray;
     padding: 2px 50px; color: white; opacity: 0.8; align-items: center;grid-gap: 50px
   }
   .testname>.name{ font-size: 30px; font-weight: bold; text-align: left; }
 
   .testname>.time{ font-size: 20px; font-weight: bold; text-align: right;}
+
+
+
+.edittestpage .pagenatorDefault{
+    display: grid;
+    background-color: transparent;
+    grid-template-columns: repeat(auto-fit,minmax(min-content,20px));
+    grid-gap: 0.1vw;
+  }
+  .edittestpage .pagenatorDefault >.pageItem{
+      display: grid;
+      font-size: 0.8em;
+      font-weight: bold;
+      color: #000000;
+      background-color: white;
+      border:1px solid lightgray;
+      cursor:pointer;
+      grid-template-areas: "num value";
+      padding: 0.1vw;
+    }
+  .edittestpage .pagenatorDefault >.pageItem:hover{color: #ffffff;  background-color: grey;   border-color:  grey;  }
+  .edittestpage .pagenatorDefault >.pageItem>.num{grid-area: num;}
+  .edittestpage .pagenatorDefault >.pageItem>.value{grid-area: value;display: none;}
+  .edittestpage .pagenatorDefault >.notclicable:hover{ color: black;  background-color: white; border-color:  white; cursor: default;}
+  .edittestpage .pagenatorDefault >.selectedPageNumber{ color: #ffffff;  background-color: #d46d23; border-color:  grey;  }
+
 
 
   /* Блок вопроса--------------------------------------*/
@@ -32,7 +57,7 @@
     grid-column-gap:1em;
     align-items: stretch;
     justify-self: stretch;
-    grid-template-columns: 130px 1fr 200px;
+    grid-template-columns: 130px 1fr 25%;
     grid-template-areas: "pic questiontext option";
     }
 
@@ -63,22 +88,22 @@
     justify-self: stretch;
     background-color: white;
     color:black;
-    border-radius: 0px; border: 1px dotted gray;
+    border-radius: 0; border: 1px dotted gray;
     grid-template-columns: 100px 1fr 200px;
     grid-column-gap:5px;
-    align-items: top;
+    align-items: flex-start;
 
   }
 .questionEditDefault>.answerlistedit >.answeredit input{ font-size: inherit; background-color: inherit;color: inherit; width: 5em;justify-items: right;border-radius: 3px;}
-.questionEditDefault>.answerlistedit >.answeredit> .pic {width:100px; text-align: center; margin: 0px;}
+.questionEditDefault>.answerlistedit >.answeredit> .pic {width:100px; text-align: center; margin: 0;}
 .questionEditDefault>.answerlistedit >.answeredit> .answer {}
 .questionEditDefault>.answerlistedit >.answeredit> .options {padding: 5px; text-align: right;}
-.questionEditDefault>.answerlistedit >.answeredit textarea { height: 5em; font-size: 1.3em; width: 100%;  color:inherit; border-radius: 0px; background-color: white;}
+.questionEditDefault>.answerlistedit >.answeredit textarea { height: 5em; font-size: 1.3em; width: 100%;  color:inherit; border-radius: 0; background-color: white;}
 .questionEditDefault>.answerlistedit >.rightitem{ background-color: green; box-shadow: 0 0 20px rgba(0,255,0,1);}
 .questionEditDefault>.answerlistedit button{font-size: 0.9em;padding:1px;}
 .questionEditDefault>.answerlistedit button:hover{ background-color: grey;}
 .questionEditDefault>.answerinputitem {display: grid; padding: 5px; background-color: green;align-items: center;font-weight: bolder; justify-self:stretch; justify-items:stretch;font-size: 1.3em;grid-template-columns: 1fr 2fr;}
-.questionEditDefault>.answerinputitem input{ background-color: whire; justify-self:stretch; justify-items:stretch;font-size: 1.3em;}
+.questionEditDefault>.answerinputitem input{ background-color: white; justify-self:stretch; justify-items:stretch;font-size: 1.3em;}
 /* Блокирующий экран--------------------------------------*/
 .BlockLayer{ right: 0; left:0; top:0; bottom:0;
   display: block;
@@ -100,7 +125,6 @@
   opacity: 1;
   z-index: 2;
   display: block;
-  position: fixed;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -117,13 +141,13 @@
 
 /* Панель инструментов--------------------------------------*/
 .edittools{
-  align-self:top;
+  align-self:flex-start;
   border: 1px dotted grey;
   padding: 0;
   display: grid;
   grid-template-columns:  1fr;
   background-color: #fcb944;
-  margin-bottom: 10 px;
+  margin-bottom: 10px;
 }
 
 .edittools button{
@@ -137,7 +161,7 @@
   margin-bottom: 2px;
 }
 .edittools>.delimiter{
-  height: 0px;
+  height: 0;
   border: 1px dotted grey;
   margin: 3px 0;
 }
@@ -162,7 +186,7 @@
   display: grid;
   position:relative;
   grid-template-columns: 25px 1fr 30px 25px;
-  border: 0px solid grey;
+  border: 0 solid grey;
   align-items: center;
 }
 .TicketItemQuest{
@@ -170,13 +194,13 @@
   grid-template-columns: repeat(auto-fill,28px);
   position:relative;
   border: 1px solid grey;
-  align-items: left;
+  align-items: flex-start;
   text-align: left;
   font-size: 12px;
   margin:5px;
   padding: 1px;
 }
-.TicketItemQuest button{margin: 0px;font-size: 10px; padding:2px}
+.TicketItemQuest button{margin: 0;font-size: 10px; padding:2px}
 
 .TicketItem1 div{ text-align: left;overflow-x: hidden;}
 
@@ -186,9 +210,44 @@
 .TicketItem1 button{}
 
 
-.edittestpage{ display: grid;  grid-template-columns: 2fr 6fr;  grid-gap: 10px;min-width: 95vw;text-align: center;}
+.edittestpage{ display: grid;  grid-template-columns: 2fr 6fr 300px;  grid-gap: 10px;min-width: 95vw;text-align: center;}
 
 .edittestpage>.menu {  align-self:flex-start;  display: grid;  grid-template-columns: 1fr;  grid-gap: 7px;text-align: center;}
+
+.testpage>.rekField{
+      display:block;
+      position:fixed;
+      bottom: 1vh;
+      left: 1vw;
+      right: 1vw;
+      padding: 0;
+      justify-items:center;
+      justify-self:stretch;
+      height: 600px;
+      background-color: transparent;
+      /* border: 1px solid black; */
+      text-align: center;
+}
+
+.edittestpage>.rekField{
+      display:block;
+      position:fixed;
+      bottom: 1vh;
+      left: 1vw;
+      right: 1vw;
+      padding: 0;
+      justify-items:center;
+      justify-self:stretch;
+      height: 90px;
+      background-color: transparent;
+      /* border: 1px solid black; */
+      text-align: center;
+}
+
+.edittestpage>.rekField:hover{
+  background-color: rgba(0,0,0,0.1);
+}
+
 
 /* .testpage{ padding-top: 0; width: 100%; max-width: 140vh;min-width: 60vw;text-align:  center; justify-self:center; overflow: visible; } */
 

@@ -1,7 +1,7 @@
 import QuestionResult from './QuestionResult';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {testIsDone_AC,nextQuestion_AC} from '../../redux/reducerTests2';
+import {testIsDone_AC,nextQuestion_AC} from '../../redux/reducerTests';
 import {getCurrentTestParamSEL,getCurrentQuestionSEL,getTestResultSEL,getCurrentAnswerSEL
   ,getRightAnswerSEL} from '../../redux/test-selectors';
 import { ITest, IQuestion, IAnswer, IUserResult } from '../../redux/interface';

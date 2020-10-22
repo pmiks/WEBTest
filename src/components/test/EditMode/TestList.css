@@ -23,7 +23,7 @@
 .testsitem>div{justify-self:stretch; align-self: center; }
 .testsitem>.idtest{font-size: 18px;  font-weight: bold;  width: 10%;  background-color: inherit;}
 .testsitem>.name{font-size: 18px;  font-weight: bold;text-align: left;background-color: inherit;}
-.deleteButton{ z-index: 10;font-size: 12px; border: 1px solid red;border-radius: 2;margin:5px; padding: 2px; font-weight: 100;}
+.deleteButton{ z-index: 10;font-size: 12px; border: 1px solid red;border-radius: 2px;margin:5px; padding: 2px; font-weight: 100;}
 .deleteButton:hover{background: red;}
-.addButton{font-size: 14px; border: 1px solid red;border-radius: 2;margin:5px; padding: 2px; font-weight: 100;margin-bottom: 30px;}
+.addButton{font-size: 14px; border: 1px solid red;border-radius: 2px;margin:5px; padding: 2px; font-weight: 100;margin-bottom: 30px;}
 .addButton:hover{background: green;}

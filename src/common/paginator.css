@@ -1,16 +1,11 @@
 .pagenatorDefault{
   display: grid;
   background-color: transparent;
-  /* justify-items:center;
-  justify-self:center; */
   grid-template-columns: repeat(auto-fit,minmax(min-content,20px));
   grid-gap: 0.1vw;
 }
 .pagenatorDefault >.pageItem{
     display: grid;
-    /* justify-self:center;
-    justify-items:center;
-    align-self: center; */
     font-size: 0.8em;
     font-weight: bold;
     color: #000000;

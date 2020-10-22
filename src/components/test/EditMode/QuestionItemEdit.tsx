@@ -1,8 +1,6 @@
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 import '../testslist.css';
 import LoadImage from '../LoadImage';
-
-//import {GLOBAL_PATH_API} from '../../../Global'
 import { IQuestion, IAnswer } from '../../../redux/interface';
 import { toNumLimMinMax } from '../../../common/functions';
 
@@ -10,7 +8,6 @@ type TQuestionItemEdit={
   question:IQuestion
   editAnswer:(idQ:number,ans:IAnswer)=>void
   deleteAnswer:(idQ:number,idA:number)=>void
-  //editQuestion:(id:number,text?:string|null,img?:string|null,comment?:string|null,istextanswer?:boolean|null,textanswer?:string|null,addalter?:number|null)=>void
   editQuestion:(quest:IQuestion)=>void
   deleteQuestion:(id:number)=>void
   saveQPhoto:(id:number,file:any)=>void
@@ -22,8 +19,7 @@ type TQuestionItemEdit={
 
 const QuestionItemEdit:FC<TQuestionItemEdit>=(
   {question, editAnswer, deleteAnswer, editQuestion, deleteQuestion, saveQPhoto, saveAPhoto, deleteAnswerPhoto,
-  deleteQuestionPhoto,checkForKHSM
-})=>{
+  deleteQuestionPhoto,checkForKHSM })=>{
   let saveQP=(e:any,id:number)=>{ if(e.target.files.length) saveQPhoto(id,e.target.files[0]);  }
   let saveAP=(e:any,id:number)=>{ if(e.target.files.length) saveAPhoto(id,e.target.files[0]); }
   return (<div className="questionEditDefault">
@@ -41,14 +37,12 @@ const QuestionItemEdit:FC<TQuestionItemEdit>=(
                             onSavePic={(e)=>{saveAP(e,answers.id)}}
                             onDeletePic={()=>{deleteAnswerPhoto(answers.id)}} />
                 })}</div>}
-
               <QCommentField  quest={question} onEdit={editQuestion}/>
               <div className="info">ID:{question.id} Созданно: {question.datecreate} Отредактированно: {question.dateedit}</div>
-    </div>);
+         </div>);
 
 }
 /*
-
 editMode - режим отрисовки (просмотр/редактирование)
 idQuest - id вопроса
 qestion - контейнер вопроса
@@ -58,7 +52,6 @@ onDel - calback при удалении вопроса
 
 type TQFieldEdit={
   quest:IQuestion
-  //onEdit:(id:number,text?:string|null,img?:string|null,comment?:string|null,istextanswer?:boolean|null,textanswer?:string|null,addalter?:number|null)=>void
   onEdit:(quest:IQuestion)=>void
   onDel:()=>void
   saveQPhoto:(id:number,file:any)=>void
@@ -69,11 +62,12 @@ type TQFieldEdit={
 const QFieldEdit:FC<TQFieldEdit>=({quest,onEdit,onDel,saveQPhoto,deleteQuestionPhoto,checkForKHSM})=>{
 return  <div className={"questionedit"}>
          <div id="pic">
-            <LoadImage id={String("QUEST"+quest.id)} zoomer="true" width="100px" height="50px" img={quest.img} onLoad={saveQPhoto} onDel={()=>{deleteQuestionPhoto(quest.id)}}/>
+            <LoadImage id={String("QUEST"+quest.id)} zoom="true" width="100px" height="50px" img={quest.img} onLoad={saveQPhoto} onDel={()=>{deleteQuestionPhoto(quest.id)}}/>
          </div>
         <div className="questiontext">
             <textarea onChange={(e)=>onEdit({...quest,question:e.target.value})} value={quest.question} />
             <textarea  placeholder={"Строка шаблонного перестроения вопроса"} value={quest.transcompilation} onChange={(e)=>onEdit({...quest,transcompilation:e.target.value})} style={{"height":"2em"}}/>
+            <input type="text"  placeholder={"Дополнительные стили"} value={quest.displaystyle?quest.displaystyle:""} onChange={(e)=>onEdit({...quest,displaystyle:e.target.value})} style={{"width":"100%"}}/>
         </div>
         <div className="option">
             <div><button onClick={onDel}>&times;</button></div>
@@ -101,51 +95,45 @@ return <>
       </>
 }
 
-
 type TAFieldInputEdit={
   onEdit:(quest:IQuestion)=>void
   className?:string
   quest:IQuestion
 }
 
-const AFieldInputEdit:FC<TAFieldInputEdit>=({onEdit,className,quest})=>{
+const AFieldInputEdit:FC<TAFieldInputEdit>=({onEdit,quest})=>{
   return <div className={"answerinputitem"}>
                  <div>Вариаты текстового ввода ответа:</div>
-                    <input type="text" value={quest.textanswer} onChange={(e)=>{onEdit({...quest,textanswer:e.target.value})}}/>
-
-          </div>
+                 <input type="text" value={quest.textanswer} onChange={(e)=>{onEdit({...quest,textanswer:e.target.value})}}/>
+         </div>
 }
 
 type TAFieldEdit={
   answer:IAnswer
-  //onEdit:(idQ:number,idA:number,text?:string|null,img?:string|null,truth?:boolean|null)=>void
   onEdit:(idQ:number,ans:IAnswer)=>void
   onDelete:()=>void
   onSavePic:(id:number,file:any)=>void
   onDeletePic:(id:number)=>void
   idQ:number
 }
+
 const AFieldEdit:FC<TAFieldEdit>=({answer,onEdit,onDelete,onSavePic,onDeletePic,idQ})=>{
   return  <>{!answer.deleted&&
      <div className={answer.truth ? "answeredit rightitem":"answeredit"}>
       <div className={"pic"}>
-      <LoadImage id={String("ANSW"+answer.id)} zoomer="true" width="100px" height="50px" img={answer.img} onLoad={onSavePic} onDel={()=>{onDeletePic(answer.id)}}/>
+      <LoadImage id={String("ANSW"+answer.id)} zoom="true" width="100px" height="50px" img={answer.img} onLoad={onSavePic} onDel={()=>{onDeletePic(answer.id)}}/>
       </div>
       <div className="answer">
       <textarea onChange={(e)=>{onEdit(idQ,{...answer,anstext:e.target.value})}} value={answer.anstext} />
       </div>
-
       <div className="options">
         <input value={answer.score} type="text" placeholder="Баллы" name="score" onChange={(e)=>{onEdit(idQ,{...answer,score:toNumLimMinMax(e.target.value,0,9999)})}}/>
         <div><input type="checkbox" name="isTrue" checked={answer.truth} onChange={(e)=>{onEdit(idQ,{...answer,truth:e.target.checked})}}/>
         Правильный ответ</div>
         {onDelete&&<button onClick={onDelete}>Удалить вариант</button>}
       </div>
-
       </div>
   }</>
-
 }
-
 
 export default QuestionItemEdit;

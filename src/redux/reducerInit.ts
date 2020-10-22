@@ -1,8 +1,6 @@
-//import {authAPI} from '../api/api';
-//import {stopSubmit} from 'redux-form';
 import {getAuthInfoThunkCreator} from './reducerAuthVK';
-import {getTestsList_TC} from './reducerTests2';
-//import { Dispatch } from 'redux';
+import {getTestsList_TC} from './reducerTests';
+import {getAphorism_TC} from './reducerAphorism';
 
 const INITIALIZATION_SUCCESS='INITIALIZATION_SUCCESS';
 
@@ -13,7 +11,8 @@ export const initializeAppThunkCreator=()=>{
   return (dispatch:any)=>{
     let prAuth=dispatch(getAuthInfoThunkCreator());
     let prTL=dispatch(getTestsList_TC());
-    Promise.all([prTL,prAuth]).then(()=>{
+    let prAphorism=dispatch(getAphorism_TC());
+    Promise.all([prTL,prAuth,prAphorism]).then(()=>{
       dispatch(initializationAC(true));
     });
   }

@@ -8,7 +8,6 @@ export const maxLength30=value=>{
   return undefined;
 }
 
-
 export const maxLengthCreator=(maxLenght)=>{
 return (value)=>{
   if (value && value.length>maxLenght) return `Максимальная длина поля ${maxLenght} символов`;

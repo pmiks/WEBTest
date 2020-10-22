@@ -6,8 +6,7 @@ import {editTicketAC,
         setCurrentEditQuestion_TC,
         addTicketAC,
         addQuestionToTicket_TC,
-        deleteTicketAC,
-        setResultAC} from '../../../redux/reducerTestsEdit';
+        deleteTicketAC} from '../../../redux/reducerTestsEdit';
 import {
    getTicketEditListSEL,
    getCurrentEditQuestionSEL,

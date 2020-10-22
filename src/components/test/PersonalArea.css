@@ -1,9 +1,8 @@
 .PersonalArea{
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 4fr 300px;
   grid-template-rows: 100vh;
   grid-gap: 1em;
-
 }
 
 .PersonalArea>.menu{
@@ -30,6 +29,25 @@
 
 
 .PersonalArea>.context{
-  background-color: none;
+  background-color: transparent;
   align-self: stretch;
+}
+
+.PersonalArea>.rekField{
+      display:block;
+      position:fixed;
+      bottom: 1vh;
+      left: 1vw;
+      right: 1vw;
+      padding: 0;
+      justify-items:center;
+      justify-self:stretch;
+      height: 90px;
+      background-color: transparent;
+      /* border: 1px solid black; */
+      text-align: center;
+}
+
+.PersonalArea>.rekField:hover{
+  background-color: rgba(0,0,0,0.1);
 }

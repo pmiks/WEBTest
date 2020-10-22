@@ -122,17 +122,17 @@ type AThReplace={type:typeof HELP_REPLACE}
 export const h_Replace_AC=():AThReplace=>({type:HELP_REPLACE})
 
 
-export const selectTest_TC=(idTest:number)=>
-async (dispatch:any)=>{
-dispatch(toggleIsSynchroAC(true));
-    let response= await testAPI.getTestsList()
-    if (response.status===200){
-        console.log("testselected");
-        dispatch(selectTest_AC(idTest));
-        dispatch(loadTest_TC(idTest));
-      }
-    dispatch(toggleIsSynchroAC(false));
-}
+// export const selectTest_TC=(idTest:number)=>
+// async (dispatch:any)=>{
+// dispatch(toggleIsSynchroAC(true));
+//     let response= await testAPI.getTestsList()
+//     if (response.status===200){
+// //        console.log("testselected");
+//         dispatch(selectTest_AC(idTest));
+//         dispatch(loadTest_TC(idTest));
+//       }
+//     dispatch(toggleIsSynchroAC(false));
+// }
 
 
 export const loadTest_TC=(id=0)=>
@@ -145,11 +145,11 @@ async (dispatch:Dispatch<ATForReducerTests>,getState:()=>AppStateType)=>{
           let test=getState().Tests.testslist.find((t)=>t.id===id)
           let hl=""
           if (id==17) {hl="5,6,6"}
-          //if (id==17) {hl="4,5,5"}
           //@ts-ignore
-          let response2 = await testAPI.loadTestHL(id,id==17?test.limit_quest+4:test.limit_quest,test.shuffleQuestion,hl)
+          let response2 = await testAPI.loadTestHL(id,(id==17?test.limit_quest+4:test.limit_quest),test.shuffleQuestion,hl)
               if (response2.status===200){
                 //dispatch(testIsDone_AC(false));
+                dispatch(selectTest_AC(id));//Добавленно после рефакторинга
                 dispatch(loadTest_AC(response2.data));
              }
           }
@@ -179,10 +179,13 @@ export const onInputAnswer_TC=(data:string|null=null,send:boolean=false)=>
       }
 }
 
-export const getTestsList_TC=()=>
+export const getTestsList_TC=(find:string|null=null)=>
 async (dispatch:Dispatch<ATForReducerTests>)=>{
+  //alert(find);
+//  console.log(find);
+//  console.log("Nhfnfnfnfnf");
   dispatch(toggleIsSynchroAC(true));
-  let response = await testAPI.getTestsList()
+  let response = await testAPI.getTestsList(find,"selectcounter DESC")
   if (response.status===200) dispatch(getTestsList_AC(response.data));
     dispatch(toggleIsSynchroAC(false));
 }
@@ -335,7 +338,7 @@ export const reducerTests=(state:ITestState=initState,action:ATForReducerTests):
        reservlist:reserv,
 //questionID:state.list[cQ1].id
        currentAnswer:-1,
-       testresult:{...state.testresult,testname:cT.testname,testcover:cT.coverimg,allIsChecked:false, isDoneTest:false}
+       testresult:{...state.testresult,testname:cT.testname,testcover:cT.coverimg,hashtag:cT.hashtag,discription:cT.discription?cT.discription:"",allIsChecked:false, isDoneTest:false}
      }
   case SELECT_TEST:
       return {...state,
@@ -356,6 +359,7 @@ export const reducerTests=(state:ITestState=initState,action:ATForReducerTests):
           testslist:[...action.data],
         }
   case TOGGLE_IS_SINCHRONIZING:
+    if (state.isSynchronizing===action.isSynchro) return state;
     return {...state,
       isSynchronizing:action.isSynchro}
   case NEXT_QUESTION:
@@ -423,7 +427,7 @@ export const reducerTests=(state:ITestState=initState,action:ATForReducerTests):
     console.log(currQ);
     let resQ:IResUserResult={
       idtest:state.idTest,
-      idquestion:state.questionID, 
+      idquestion:state.questionID,
       idanswer:state.answerID,
       idticket:state.currentTicket,
       inputtext:currQ.inputAnswer,

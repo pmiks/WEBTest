@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
 
-import {getTestResult_TC,getResult_TC} from '../../redux/reducerTests2';
+import {getTestResult_TC,getResult_TC} from '../../redux/reducerTests';
 
 
 

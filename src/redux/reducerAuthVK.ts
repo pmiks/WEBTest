@@ -1,8 +1,6 @@
 import {authTAPI} from '../api/api';
 import { TypeMe } from './interface';
 import { Dispatch } from 'redux';
-//import {stopSubmit} from 'redux-form';
-
 
 let me:TypeMe={
   iduser:null,
@@ -28,6 +26,8 @@ export const getAuthInfoThunkCreator=()=>{
       {
         if (response.status===200)
            dispatch(setMyAuthDataAC({...response.data,isAuth:true}))
+           console.log("11111")
+           console.log(response.data)
         })
   }
 }

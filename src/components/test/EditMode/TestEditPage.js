@@ -3,99 +3,62 @@ import React,{useEffect} from "react";
 import TestQuestionEdit from './QuestionItemEditConatainer';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-//import TestsList from './TestsEditListContainer'
-//import TestsResult from './TestResult'
 import Paginator from '../../../common/paginator2';
-import Player from '../../../common/MusicPlayer';
-//import QuestionResult from './QuestionResultContainer';
 import QuestionEditTools from './QuestionEditToolsContainer';
 import TestEdit from './TestEditContainer.jsx';
-//import NavPanel from './NavPanelContainer';
 import TicketsEdit from './TicketTestEditContainer';
 import TestResultEdit from './TestResultEditContainer';
-//import TimerBlock from './TimerBlock';
-//import Tickets from './TicketTestContainer';
 import TestCheck from './TestCheckContainer';
 import AlertWindow from '../../alertwindow/AlertWindowContainer';
-import {withRouter,NavLink} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from '../../../common/myhocs';
 
 
 import {getCurrentEditTestParamSEL} from '../../../redux/test-selectors';
-//import {withAuthRedirect} from '../../common/myhocs';
-import {//selectTestAC,
+import {
         selectTestEditTC,
-        //selectTestThunkCreator,
-        setCurrentEditQuestion_TC,
-        addNewQuestionThunkCreator,
-        editModeONAC,
-//        offEditModeAC,
-        getTestsListThunkCreator,
-        loadQuestionThunkCreator,
-        testIsDoneAC,
-        nextQuestionTC,
+        setCurrentEditQuestion_TC
       } from '../../../redux/reducerTestsEdit';
 
 
-const TestPage=({idTest,
-//  editMode,
-  list,
-  currentQuestion,
-  listlength,
-//  isDoneTest,
-//  onEditMode,
-//  offEditMode,
-//  getTestsList,
-//  onSave,
-//  onCancel,
-//  addQuest,
-  setQuest,
-//  onNext,
-  selectTestEdit,
-  tp,
-//  currentAnswer,
-//  onPrev,
-//  flugTestIsOver,
-//  testIsDone,
-  match,
-//  editModeON
-})=>{
+const TestPage=({idTest,list,currentQuestion,listlength,setQuest,selectTestEdit, match,})=>{
 
    useEffect(() => {
        selectTestEdit(match.params.testid);
-//       editModeON();
    },[match.params.testid]);
 
-
-  let setQ=(page,pc)=>{
+   let setQ=(page,pc)=>{
      setQuest(list[page-1].id);
    }
- return <div className={"edittestpage"}>
-      <div className="menu">
-      <AlertWindow/>
-      <TestCheck/>
-      <QuestionEditTools/>
-      <TicketsEdit/>
-      {/*(idTest>-1)&&<TicketsEdit/>*/}
-      </div>
-      <div>
-      {/*(idTest>-1)&&(listlength>0)&&tp.type_levelgame&&list[currentQuestion].isChecked&&!flugTestIsOver&& <QuestionResult/>*/}
-
-      {/*(idTest>-1)&&(listlength>0)&&!flugTestIsOver&&(idTest>0)&&tp.testtime>0&&!editMode&&<TimerBlock secondstime={tp.testtime} onEndCount={testIsDone}/>*/}
-      {(idTest>-1)&&(listlength>0)&&<Paginator prevnext={true}
-                        totalCount={listlength} startend={true}   pageSize={1}
-                        currentPage={currentQuestion+1}
-                        onClick={setQ}/>}
-      {(idTest>-1)&&(listlength>0)&&<TestQuestionEdit/>}
-      <TestResultEdit/>
-      {/*<Player url={"https://api.electricalab.ru/sounds/khsm_lifeline_1-.mp3"}/>*/}
-      {/*(idTest>-1)&&(listlength>0)&&<NavPanel/>*/}
-      {/*!editMode&&(idTest>0)&&(tp.tickets.length>0)&&<Tickets/>*/}
-      {(idTest>-1)&&<TestEdit/>}
-      {/*(idTest>-1)&&flugTestIsOver&&<TestsResult  list={list}/>*/}
-      </div>
-      {/*<NavLink to={""}><button>На главную</button></NavLink>*/}
-  </div>;
+   const frame100p_90=()=>{return {__html:'<iframe frameborder="no" hspace="0" vspace="0" marginheight="0" marginwidth="0" scrolling="no"  width="100%" height="100%" sandbox="allow-same-origin allow-top-navigation allow-forms allow-scripts allow-popups" src="https://yes-t.net/yr/rtb_5.html"></iframe>'}}
+   const frame160_600=()=>{return {__html:'<iframe frameborder="no" hspace="0" vspace="0" marginheight="0" marginwidth="0" scrolling="no"  width="100%" height="600px" sandbox="allow-same-origin allow-top-navigation allow-forms allow-scripts allow-popups" src="https://yes-t.net/yr/rtb_6.html"></iframe>'}}
+   return <div className={"edittestpage"}>
+          <div className="menu">
+          <AlertWindow/>
+          <TestCheck/>
+          <QuestionEditTools/>
+          <TicketsEdit/>
+          {/*(idTest>-1)&&<TicketsEdit/>*/}
+          </div>
+          <div>
+          {/*(idTest>-1)&&(listlength>0)&&tp.type_levelgame&&list[currentQuestion].isChecked&&!flugTestIsOver&& <QuestionResult/>*/}
+          {/*(idTest>-1)&&(listlength>0)&&!flugTestIsOver&&(idTest>0)&&tp.testtime>0&&!editMode&&<TimerBlock secondstime={tp.testtime} onEndCount={testIsDone}/>*/}
+          {(idTest>-1)&&(listlength>0)&&<Paginator prevnext={true}
+                            totalCount={listlength} startend={true}   pageSize={1}
+                            currentPage={currentQuestion+1}
+                            onClick={setQ}/>}
+          {(idTest>-1)&&(listlength>0)&&<TestQuestionEdit/>}
+          <TestResultEdit/>
+          {/*<Player url={"https://api.yes-t.net/sounds/khsm_lifeline_1-.mp3"}/>*/}
+          {/*(idTest>-1)&&(listlength>0)&&<NavPanel/>*/}
+          {/*!editMode&&(idTest>0)&&(tp.tickets.length>0)&&<Tickets/>*/}
+          {(idTest>-1)&&<TestEdit/>}
+          {/*(idTest>-1)&&flugTestIsOver&&<TestsResult  list={list}/>*/}
+          </div>
+          {/*<NavLink to={""}><button>На главную</button></NavLink>*/}
+          <div><div className="rekField2" dangerouslySetInnerHTML={frame160_600()}/></div>
+          <div className="rekField" dangerouslySetInnerHTML={frame100p_90()}/>
+      </div>;
 }
 
 
